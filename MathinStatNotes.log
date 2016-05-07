@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.6)  7 MAY 2016 22:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.6)  7 MAY 2016 23:56
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1479,8 +1479,8 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 110.
  ) 
 Here is how much of TeX's memory you used:
- 23368 strings out of 493054
- 430732 string characters out of 6134767
+ 23366 strings out of 493054
+ 430716 string characters out of 6134767
  524049 words of memory out of 5000000
  25721 multiletter control sequences out of 15000+600000
  41879 words of font info for 235 fonts, out of 8000000 for 9000
@@ -1513,10 +1513,10 @@ sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.
 pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sftt1000.pf
 b>
-Output written on MathinStatNotes.pdf (42 pages, 434479 bytes).
+Output written on MathinStatNotes.pdf (42 pages, 432872 bytes).
 PDF statistics:
- 700 PDF objects out of 1000 (max. 8388607)
- 622 compressed objects within 7 object streams
- 298 named destinations out of 1000 (max. 500000)
+ 698 PDF objects out of 1000 (max. 8388607)
+ 620 compressed objects within 7 object streams
+ 296 named destinations out of 1000 (max. 500000)
  23703 words of extra memory for PDF output out of 24883 (max. 10000000)
 
