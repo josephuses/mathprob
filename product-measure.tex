@@ -1,0 +1,158 @@
+\chapter{Product Measure}
+
+
+
+\begin{definition}[Product $\sigma$-algebra]
+Let $(\Omega_1, \F_1, \mu_1)$ and $(\Omega_2, \F_2, \mu_2)$ be any two measure 
+spaces. In $\Omega_1\times \Omega_2$ let $\Re$ be the collection of all rectangles 
+$B\times C$ with $B\in \F_1$ and $C\in \F_2$. The product $\sigma$-algebra $\F_1\times F_2$ is the smallest $\sigma$-algebra on $\Omega_1\times \Omega_2$ containing $\Re$.
+\end{definition}
+
+
+
+\begin{definition}[Some notations]
+Throughout, we will assume that $\mu_1$ and $\mu_2$ are finite measures. Also, we let
+\begin{align*}
+\Omega &= \Omega_1\times \Omega_2\\
+	\F &= \F_1\times \F_2\\
+	I_1^f(\omega_1) & = \int f(\omega_1,\cdot)d\mu_2\\
+	I_2^f(\omega_2)&=\int f(\cdot, \omega_2)d\mu_1.
+\end{align*}
+\end{definition}
+
+
+
+
+\begin{lemma}
+Let $f$ be a bounded $\F$-measurable function on $\Omega$ then
+\begin{enumerate}
+\item for each $\omega_1\in\Omega_1$, the map $f(\omega_1, \cdot): \omega_2\mapsto f(\omega_1, \omega_2)$ is $\F_2$-measurable on $\Omega_2$, and
+\item for each $\omega_2\in \Omega_2$, the map $f(\cdot, \omega_2):\omega_1\mapsto f(\omega_1, \omega_2)$ is $\F_1$-measurable on $\Omega_1$.
+\end{enumerate}
+\end{lemma}
+
+
+
+\begin{proof}
+Let $g:\omega_2\mapsto (\omega_1, \omega_2)$ and note that $f(\omega_1, \cdot)=f\circ g$. Now $f$ is $\F$-measurable and $g$ is $\F_2/F$-measurable. Hence $f(\omega_1,\cdot)$ is $\F_2$-measurable. Similarly, we can show that $f(\cdot, \omega_2)$ is $\F_1$-measurable.
+\end{proof}
+
+
+\begin{lemma}
+Let $f$ be a bounded $\F$-measurable function on $\Omega$ then 
+\begin{enumerate}
+\item the function $I_1^f$ is $\F_1$-measurable,
+\item the function $I_2^f$ is $\F_2$-measurable, and
+\item $\int I_1^f d\mu_1=\int I_2^f d\mu_2$.
+\end{enumerate}
+\end{lemma}
+
+
+
+
+\begin{proof}
+Let $f=I_{A\times B}$. Then $I_1^f(\omega-1)=I_A(\omega_1)\mu_2(B)$ which is clearly $\F_1$-measurale. Define
+\begin{equation*}
+\G=\{F\in\F: I_1^f\ \text{is}\ F_1\text{-measurable,}\ f=I_F \}.
+\end{equation*}
+Then $\G$ is a $\sigma$-algebra containing $\Re$. It follows that $I_1^f$ is $\F_1$-measurable for $f=I_F, F\in\F$. That $I_1^f$ is $\F_1$-measurable for simple function $f$ follows from linearity of the integral and that it is $\F_1$-measurable for nonnegative $f$ follows from MCT. Finally that $I_1^f$ is $\F_1$-measurable for bounded measurable $f$ follows from measurability of $I_1^{f^+}$ and $I_1^{f^-}$. The measurability of $I_2^f$ is proved similarly.
+
+To prove (c), first assume that $f=I_{A\times B}$ with $A\in\F_1$ and $B\in\F_2$. Then $I_1^f(\omega_1)=I_A(\omega_1)\mu_2(B)$ and $I_2^f(\omega_2)=\mu_1(A)I_B(\omega_2)$. Now, 
+\begin{equation*}
+\int I_1^f d\mu_1 = \int I_A d\mu_1\cdot \mu_2(B)=\mu_1(A)\mu_2(B)
+\end{equation*}
+and
+\begin{equation*}
+\int I_2^f d\mu_2=\mu_1(A)\int I_B d\mu_2 = \mu_1(A)\mu_2(B).
+\end{equation*}
+Hence, the result is true for sets of the form $A\times B$ with $A\in \F_1$ and $B\in \F_2$. Since these sets generate $\F$ then the result must also be true for $I_F$ with $F\in\F$. By the linearity of integrals, the rsult is also true for simple $f$. The result can then be extended to nonnegative $f$ by MCT. Finally, it can be extended to bounded functions by noting that $f=f^{+}-f^-$.
+\end{proof}
+
+
+
+
+\begin{theorem}[Fubini's Theorem]
+For $A\in\F$ define
+\begin{equation*}
+\mu(A)=\int I_1^f d\mu_1=\int I_2^f d\mu_2
+\end{equation*}
+with $f=I_A$. Then $\mu$ is a measure on $\F$. Moreover, $\mu$ is the unique measure
+for which
+\begin{equation*}
+\mu(A\times B)=\mu_1(A)\mu_2(B)
+\end{equation*}
+for $A\in \F_1$ and $B\in \F_2$. We write this as $\mu=\mu_1\times \mu_2$. For any 
+nonnegative $\F$-measurable function $f$, we have
+\begin{equation*}
+\int fd\mu = \int I_1^f d\mu_1 = \int I_2^f d\mu_2.
+\end{equation*}
+\end{theorem}
+
+
+
+
+
+\begin{proof}
+The previous lemma guarantees that $\mu$ as given in the theorem is well-defined. Now that $\mu$ is a measure follows from the linearity of the integral and the MCT. That the measure $\mu$ is unique follows from the fact that the collection $\Re$ of rectangles is a $\pi$-system. Now let $f=I_{A\times B}$ with $A\in\F_1$ and $B\in\F_2$. Then
+\begin{equation*}
+\int fd\mu=\mu(A\times B)=\mu_1(A)\mu_2(B)=\int I_1^f d\mu_1=\int I_2^fd\mu_2.
+\end{equation*}
+Since sets of the form $A\times B$ with $A\in\F_1$ and $B\in\F_2$ generate $\F$ then the result must also be true for $I_F$ with $F\in\F$. By the linearity of integrals, the result is also true for simple $f$ and this can then be extended to nonnegative $f$ by MCT.
+\end{proof}
+
+
+
+
+
+\begin{definition}[Independence]
+Let $X$ and $Y$ be two random variables deined on a probability space $(\Omega, \F, \prob)$. Then $X$ and $Y$ are said to be independent if
+\begin{equation*}
+\Prob(A\cap B)=\Prob(A)\Prob(B)
+\end{equation*}
+for $A\in\sigma(X)$ and $B\in\sigma(Y)$.
+\end{definition}
+
+
+
+\begin{definition}[Joint Law and Joint Distribution]
+Let $X$ and $Y$ be two random variables on some probability space $(\Omega, \F, \Prob)$. The joint law $\mu_{X,Y}$ of the pair $(X,Y)$ is defined by
+\begin{equation*}
+\mu_{X,Y}(A)=\Prob\{(X,Y)\in A \}
+\end{equation*}
+for $A\in\B\times\B$. The joint distribution $F_{X,Y}$ of $X$ and $Y$ is defined by
+\begin{equation*}
+F_{X,Y}(x,y)=\Prob\{X\leq x, Y\leq y \}.
+\end{equation*}
+\end{definition}
+
+
+
+\begin{theorem}
+Let $X$ and $Y$ be two random variables with laws $\mu_X$ and $\mu_Y$, respectively and distribution functions $F_X$ and $F_Y$, respectively. The following three statements are equivalent:
+\begin{enumerate}
+\item $X$ and $Y$ are independent.
+\item $\mu_{X,Y}=\mu_X\times \mu_Y$
+\item $F_{X,Y}(x,y)=F_X(x)F_Y(y)$.
+\end{enumerate}
+\end{theorem}
+
+
+
+
+\begin{proof}
+Assume that $X$ and $Y$ are independent. Then
+\begin{equation*}
+\mu_{X,Y}(A\times B)=\Prob(\{X\in A\}\cap \{Y\in B \})=\Prob(X\in A)\Prob(Y\in B)=\mu_X(A)\mu_Y(B).
+\end{equation*}
+hence, (1) implies (2). Now suppose that (2) is true. Then
+\begin{equation*}
+F_{X,Y}(x,y)=\mu_{X,Y}((-\infty,x]\times(-\infty, y])=\mu_X((-\infty, x])\mu_Y((-\infty, y])=F_X(x)F_Y(y). This shows that (2) implies (3).
+\end{equation*}
+Finally to show that (3) implies (1) note that
+\begin{equation*}
+\Prob(X\leq x,Y\leq y)=F_{X,Y}(x,y)=F_X(x)F_Y(y)=\Prob(X\leq x)\Prob(Y\leq y).
+\end{equation*}
+Hence $\Prob(A\cap B)=\Prob(A)\Prob(B)$ for $A$ of the form $\{X\leq x \}$ for 
+some $x\in \Re$ and $B$ of the form $\{Y\leq y \}$ for some $y\in \Re$. But sets of the form $\{X\leq x \}$ generate $\sigma(X)$ and sets of the form $\{Y\leq y \}$ generate $\sigma(Y)$ and so the result extends to $A\in\sigma(X)$ and $B\in\sigma(Y)$. This shows that $X$ and $Y$ are independent. Therefore, all three 
+statements are equivalent.
+\end{proof}

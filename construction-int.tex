@@ -1,0 +1,171 @@
+\chapter{Construction of the Integral}
+
+\begin{definition}[Simple function]
+Let $(\Omega, \F, \mu)$ be a measure space. A nonnegative measurable function $f$ is called \emph{simple} if $f$ may be written as a finite sum $f=\sum_{k=1}^{m}a_kI_{A_k}$ where $a_k\in[0,\infty]$ and $A_k\in\F$. We then define the integral of $f$ with respect to $\mu$ by $\int fd\mu=\sum_{k=1}^{m}a_k\mu(A_k)$.
+\end{definition}
+
+
+
+Note that 
+\begin{equation*}
+I_{A_k}=
+\begin{cases}
+1 &\text{if}\qquad \omega\in A_k\\
+0 &\text{if}\qquad \omega\notin A_k
+\end{cases}
+\end{equation*}
+This means that in $\sum_{k=1}^m a_kI_{A_k}$, you are adding a number $a_k$ assigned to $A_k$ as long as $\omega\in A_k$.
+
+\begin{example}
+Let $\Omega=[0,5]$ and 
+\begin{align*}
+f(\omega)&=
+	\begin{cases}
+	2 & \text{if}\quad 0\leq \omega <3\\
+	5 & \text{if}\quad 5\leq \omega <4\\
+	3 & \text{if}\quad 3\leq \omega \leq 5
+	\end{cases}\\
+	&=2I_{[0,3)}+5I_{[3,4)}+3I_{[4,5]}
+\end{align*}
+Now 
+\begin{align*}
+f=\sum_{k=1}^{m} a_k\mu(A_k)\implies \int fd\mu = \sum_{k=1}^{m} a_k\mu(A_k)
+\end{align*}
+For this example, this means that 
+\begin{equation*}
+\int fd\lambda = 2\lambda([0,3))+5\lambda([3,4))+3\lambda([4,5])=2(3)+5(1)+3(1)=14
+\end{equation*}
+\end{example}
+
+The question is, is $f$ well defined? No. For instance, 
+\begin{equation*}
+f=2I_{[0,4)}(\omega)+3I_{[3,5]}(\omega)
+\end{equation*}
+however,
+\begin{equation*}
+\int fd\lambda = 2(4)+3(2)=14
+\end{equation*}
+gives the same result. That is, $f$ can be written in other ways but $\int fd\mu$ will always give the same result.
+
+The following theorem states that $\int fd\mu$ is indeed well-defined.
+
+
+
+
+
+\begin{theorem}\label{thm:c7-1}
+\begin{enumerate}
+\item The integral $\int fd\mu$ os well-defined.
+\item If $f$, $g$ are simple functions and $c\geq 0$ then $f+g$ and $cf$ are simple functions and $\int(f+g)d\mu=\int fd\mu+\int gd\mu$, $\int cfd\mu = c\int fd\mu$.
+\item If $f$ and $g$ are simple functions with $f\leq g$ then $\int fd\mu\leq \int gd\mu$.
+\item If $f$ and $g$ are simple functions then $f\vee g$ and $f\wedge g$ are simple functions.
+\end{enumerate}
+\end{theorem}
+
+
+
+\begin{proof}
+\begin{prooflist}
+\item consider the simple function $f=\sum_{i=1}^{m}a_iI_{A_i}$. Note that there are no restricitons for the $A_i$. In fact, they might not be disjoint. Now define
+\begin{equation*}
+B_j=\left\{\omega\in\bigcup_{i=1}^m A_i: f(\omega)=b_j \right\}
+\end{equation*}
+The $B_j$'s are disjoint and the $b_j$'s are distinct values corresponding to the $a_j$'s. 
+
+Then
+\begin{align*}
+\int fd\mu &= \sum_{i=1}^{m} a_i\mu(A_i)\\
+&=\sum_{i=1}^{m} a_i\mu\left(A_i\cap \bigcup_{j=1}^n B_j\right)\\
+&=\sum_{i=1}^{m} a_i\mu\left(\bigcup_{j=1}^n(A_i\cap B_j)\right)\qquad \text{$(A_i\cap B_j)$'s are disjoint}\\
+&=\sum_{i=1}^{m}a_i\left(\sum_{j=1}^{n} \mu(A_i\cap B_j)\right)\\
+&=\sum_{j=1}^{n}\left(\sum_{i=1}^{m}a_i\mu(A_i\cap B_j)\right)
+\end{align*}
+
+
+Now,
+\begin{align}
+\sum_j b_j\mu(B_j)&=\sum_j\mu(B_j)\sum_{A_k\supseteq B_j} a_k\qquad (\text{Add all $a_k$ where $A_k\supseteq B_j$})\label{eq:illus1}\\
+	&=\sum_k a_k\sum_{B_j\subseteq A_k} \mu(B_j)\qquad \text{Note: the $B_i$'s are disjoint}\label{eq:illus3}\\
+	&=\sum a_k \mu(A_k)\label{eq:illus2}
+\end{align}
+This proves that $f$ is well-defined.
+
+To illustrate what we mean by the $b_j$'s and $B_j$'s, we give an example.
+
+\begin{example}
+	\begin{align*}
+	f&=\redover{a_1}{2}I_{[0,3)}+\redover{a_2}{2}I_{[2,4]}+\redover{a_3}{1}I_{[3,5]}\\
+	&=
+	\begin{cases}
+	\redover{b_1}{2}& \omega\in[0,2)\\
+	\redover{b_2}{5}& \omega\in[2,3)\\
+	\redover{b_3}{4}& \omega\in[3,4]\\
+	\redover{b_4}{1}& \omega\in(4,5]
+	\end{cases}
+	\end{align*}
+	
+	\textcolor{red}{Insert figure here}
+\end{example}
+
+To illustrate Eqs. \ref{eq:illus1} to \ref{eq:illus2}, we have the following example.
+
+\begin{example}
+\begin{align*}
+\mu(B_1)&[a_1+a_2]+\mu(B_2)[a_3]+\mu(B_3)[a_3+a_4+a_5]+\mu(B_4)[a_4+a_5]\\
+	&=a_1\mu(B_1)+a_2\mu(B_1)+a_3[\mu(B_2)+\mu(B_3)]+a_4[\mu(B_3)+\mu(B_4)]+a_5[\mu(B_3)+\mu(B_4)]
+\end{align*}
+
+\end{example}
+
+\item Note that $f+g=\sum(a_i+b_j)_{I_{A_i\cap B_j}}$ and 
+
+\end{prooflist}
+\end{proof}
+
+
+
+
+
+
+
+\begin{proof}
+\begin{enumerate}
+\item For distinct nonnegative values $b_j$ of $f$ define $B_j=\{\omega\in\Omega:f(\omega)=b_j \}$. Then
+\begin{align*}
+\sum b_j\mu(B_j)&=\sum\mu(B_j)\sum\{a_k: A_k\supseteq B_j \}\\
+	&=\sum a_k\sum\{\mu(B_j): B_j\subseteq A_k \}\\
+	&=\sum a_k \mu(A_k).
+\end{align*}
+This proves that $f$ is well-defined.
+
+\item Note that $f+g=\sum(a_i+b_j)I_{A_i\cap B_j}$ and $cf=\sum ca_iI_{A_i}$. So that $f+g$ and $cf$ are both simple. Now
+\begin{align*}
+\int(f+g)d\mu&=\sum_i a_i \sum\mu(A_i\cap B_j)+\sum_j b_j\sum_i\mu(A_i\cap B_j)\\
+	&=\sum_i a_i\mu(A_i)+\sum_j b_j\mu(B_j)\\
+	&=\int fd\mu+\int gd\mu
+\end{align*}
+and
+\begin{equation*}
+\int cfd\mu = c\sum a_iI_{A_i}=c\int fd\mu.
+\end{equation*}
+
+\item Note that for fixed $i$, $j$ we have $a_i\mu(A_i\cap B_j)\leq b_j\mu(A_i\cap B_j)$. It follows from this that
+\begin{align*}
+\int fd\mu&=\sum a_i\mu(A_i)=\sum_i\sum_j a_i\mu(A_i\cap B_j)\\
+	&=\sum_i\sum_j b_j\mu(A_i\cap B_j)\leq \sum_j b_j\mu(B_j)=\int gd\mu.
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+
+\begin{definition}
+Let $(\Omega, \F, \mu)$ be a measure space and $f$ be a nonegative measurable function, we define $\int f d\mu=\sum\{\int gd\mu: 0\leq g\leq f, g\ \text{simple} \}$.
+\end{definition}
+
+\begin{theorem}
+For any measurable $f\geq 0$, there exists an increasing sequence of simple functions $f_n$ with $f=\lim\limits_{n\\to \infty}f_n$. Moreover for any such sequence $\{f_n \}$, $\int fd\mu=\lim\limits_{n\to \infty}\int f_nd\mu$.
+\end{theorem}
+
+\begin{proof}
+Let $A_{nj}=f^{-1}$
+\end{proof}

@@ -1,0 +1,105 @@
+\chapter{Measurable Functions and Mappings}
+
+\begin{definition}[$\F/F'$-measurable]
+Let $(\Omega, \F)$ and $(\Omega',\F')$ be two measurable spaces. For a mapping $T:\Omega\to\Omega'$ and $A'\subset \Omega'$, define
+\begin{equation*}
+T^{-1}(A')=\{\omega\in\Omega: T(\omega)\in A' \}
+\end{equation*}
+\end{definition}
+
+\begin{theorem}
+The map $T^{-1}$ preserves set operations:
+\begin{enumerate}
+\item $T^{-1}(\bigcup_\alpha A_\alpha)=\bigcup_\alpha T^{-1}(A_\alpha)$
+\item $T^{-1}(\bigcap_\alpha A_\alpha)=\bigcap_\alpha T^{-1}(A_\alpha)$
+\item $T^{-1}(A^c)=(T^{-1}(A))^c$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item $\omega \in T^{-1}\left(\bigcup_\alpha A_\alpha\right)$ if and only if $T(\omega)\in A_\alpha$ for some $\alpha$. This is equivalent to $\omega\in T^{-1}(A_\alpha)$ for some $\alpha$, i.e., $\omega\in \bigcup_\alpha T^{-1}(A_\alpha)$.
+\item Similar to (a) with union replaced by intersection.
+\item $\omega\in T^{-1}(A^c)$ if and only if $T(\omega)\notin A$. This is equivalent to $\omega\notin T^{--1}(A)$, i.e., $\omega\in(T^{-1}(A))^c$.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+Let $T$ be a mapping from the measurable space $(\Omega, \F)$ into the measurable space $(\Omega', \F')$. Then $T^{-1}(\F')=\{A'\subseteq\Omega':T^{-1}(A')\in\F \}$ is a $\sigma$-algebra on $\Omega'$.
+\end{theorem}
+
+\begin{proof}
+$\Omega=T^{-1}(\Omega')$  so that $\Omega\in T^{-1}(\F')$. Since $(T^{-1}(A'))^c=T^{-1}(A'^c)$ then $T^{-1}(\F')$ is closed under complementation. Lastly, $\bigcup_{n=1}^\infty T^{-1}(A_n')=T^{-1}\left(\bigcup_{n=1}^\infty A_n'\right)$. Hence, $T^{-1}(\F')$ is a $\sigma$-algebra. Now, let $\mathcal{G}=\{A'\subseteq\Omega':T^{-1}(A')\in\F \}$. $T^{-1}(\Omega')=\Omega\in\F$ so that $\Omega'\in\mathcal{G}$. $T^{-1}(A'^c)=(T^{-1}(A'))^c\in\F$ whenever $A'\in\mathcal{G}$. Hence, $\mathcal{G}$ is closed under complementation. Finally, $T^{-1}\left(\bigcup A_n'\right)=\bigcup T^{-1}(A_n')\in\F$ whenever $A_n'\in\mathcal{G}$. Therefore, $\mathcal{G}$ is a $\sigma$-algebra.
+\end{proof}
+
+\begin{theorem}\label{thm:3}
+If $\mathcal{C}\subseteq \F'$, $\sigma(\mathcal{C})=\F'$ and $T^{-1}(A')\in\F$ for every $A'\in\mathcal{C}$, then $T$ is $\F/\F'$-measurable.
+\end{theorem}
+
+\begin{proof}
+Let $\G=\{A'\in\F'\mid T^{-1}(A')\in\F \}$. Then $\G$ is a $\sigma$-algebra containing $\mathcal{C}$ and, hence, $\G=\F'$.
+\end{proof}
+
+
+\begin{theorem}
+If $(\Omega, \F)$, $(\Omega', \F')$ and $(\Omega'', \F'')$ are measurable spaces, and if $T$ is $\F/F'$-measurable and $T'$ is $\F'/\F''$-measurable, then $T'\circ T$ is $\F/\F''$-measurable.
+\end{theorem}
+
+\begin{proof}
+Let $A''\in \F''$. It follows that $(T'\circ T)^{-1}(A'')=T^{-1}(T'^{-1}(A''))\in\F$ since $T'^{-1}(A'')\in\F'$.
+\end{proof}
+
+\begin{definition}[Measurable function]
+Let $(\Omega, \F)$ be a measurable space. A function $f:\Omega\to \mathbb{R}$ is called measurable if $f^{-1}(B)\in\F$ for every Borel set $B$.
+\end{definition}
+
+\begin{theorem}
+The function $f:\Omega\mapsto \mathbb{R}$ is measurable if and only if $\{f\leq c\}:=\{\omega\in\Omega\mid f(\omega)\leq c \}\in \F$ for all $c\in \mathbb{R}$.\\
+\end{theorem}
+
+\begin{proof}
+The class $\{(-\infty, c]: c\in \mathbb{R} \}$ generates the Borel $\sigma$-algebra. Also, note that $\{f\leq c \}=f^{-1}((-\infty, c])$. The result then follows from Theorem \ref{thm:3}.
+\end{proof}
+
+\begin{theorem}
+Let $\lambda\in\mathbb{R}$ and $f$, $f_1$, $f_2$ be measurable. Then $f_1+f_2$, $f_1f_2$ and $\lambda f$ are measurable.
+\end{theorem}
+
+\begin{proof}
+Note that $\{f_1+f_>c \}=\bigcup_{r\in\mathbb{Q}}(\{f_1>r\})\cap \{f_2>c-r \}$. Hence, $f_1+f_2$ is measurable. If $\lambda=0$, then $\{\lambda f\leq c \}$ is neither $\varnothing$ (if $c<0$) or $\Omega$ (if $c\geq 0$). Hence $\lambda f$ is measurable. If $\lambda\neq 0$, note that
+\begin{equation*}
+\{\lambda f>c \} = \{f>c/\lambda \} \quad \text{if}\quad \lambda >0
+\end{equation*}
+and
+
+\begin{equation*}
+\{\lambda f>c \} = \{f<c/\lambda \} \quad \text{if}\quad \lambda <0
+\end{equation*}
+This shows that $\lambda f$  is measurable.
+
+To show that $f_1f_2$ is measurable, first note that 
+\begin{equation*}
+\{f^2>c \}=\{f>\sqrt{c} \}\cup \{f<-\sqrt{c} \}.
+\end{equation*}
+This shows that $f^2$ is measurable whenever $f$ is measurable. Observe that
+\begin{equation*}
+f_1f_2=\frac{1}{2}[(f_1+f_2)^2-f_1^2-f_2^2]
+\end{equation*}
+and, hence, $f_1f_2$ is measurable.
+\end{proof}
+
+\begin{theorem}\label{thm:7}
+Let $\{f_n: n\in\mathbb{N} \}$ be a sequence of measurable functions. Then $\inf f_n$, $\lim\inf f_n$ and $\lim \sup f_n$ are measurable into $([-\infty, +\infty], \mathcal B[-\infty, +\infty])$. Further $\{\omega \in \Omega : \lim f_n(\omega)\ \text{exists} \}\in\F$.
+\end{theorem}
+
+\begin{proof}
+Note that $\{\inf f_n>c \}=\bigcap_n \{f_n>c \}\in\F$. Hence $\inf f_n$ is measurable. Let $g_n=\inf_{k\geq n}f_k$. Then
+\begin{equation*}
+\{\lim\inf f_n\leq c \}=\{\sup g_n \leq c \}=\bigcap \{g_n\leq c \}\in\F.
+\end{equation*}
+Hence, $\lim\inf f_n$ is measurable. Now, $\lim\sup f_n=-\lim \inf -f_n$ and so $\lim\sup f_n$ is measurable. Finally,
+\begin{equation*}
+\{\lim f_n\ \text{exists} \}=\{\lim\sup f_n<\infty \}\cap \{\lim\inf f_n>-\infty \}\cap g^{-1}(\{0\}),
+\end{equation*}
+where $g=\lim\sup f_n-\lim\inf f_n$. This is in $\mathcal F$.
+\end{proof}

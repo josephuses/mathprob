@@ -1,0 +1,256 @@
+\chapter{Measures}
+
+\begin{definition}[Measure]
+A set function $\mu$ on an algebra $\mathcal F$ in $\Omega$ is a measure if
+\begin{enumerate}[label=\roman*.]
+\item $\mu(A)\in[0,\infty]$ for $A\in \mathcal F$,
+\item $\mu(\varnothing)=0$,
+\item if $\{A_n\}$ is a disjoint collection of sets in $\mathcal F$ with 
+	$\bigcup_{n=1}^\infty A_n\in \mathcal F$ then
+	\begin{equation}
+	\mu\left(\bigcup_{n=1}^\infty A_n\right)=\sum_{n=1}^{\infty}\mu(A_n).
+	\end{equation}
+\end{enumerate}
+If $\mu$ is a measure on a $\sigma$-algebra $\mathcal F$ then the triple 
+$(\Omega, \mathcal F, \mu)$ is called a measure space.
+\end{definition}
+
+\begin{definition}
+Let $\mu$ be a measure on $\mathcal F$. Then $\mu$ is called
+\begin{enumerate}[label=\roman*.]
+\item finite if $\mu(\Omega)<\infty$.
+\item $\sigma$-finite if there is a sequence $\{A_n\}$ of elements of $\mathcal F$
+such that $\mu(A_n)<\infty$ for all $n$ and $\bigcup A_n=\Omega$.
+\item a probability measure if $\mu(\Omega)=1$.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+A measure $\mu$ on $(\Omega, \mathcal F)$ is discrete if there are countably many points 
+$\omega_i$ in $\Omega$ and numbers $m_i$ in $[0,\infty]$ such that $\mu(A)=\sum_{\omega_i\in A} m_i$
+for $A$ in $\mathcal F$. If $\mathcal F$ contains each singleton $\{\omega_i \}$, then $\mu$
+is $\sigma$-finite if and only if $m_i<\infty$ for all $i$.
+\end{example}
+
+\begin{proof}
+We first prove the first statement.
+\begin{prooflist}
+\item  The first condition is satisfied since if $m_i\in [0,\infty]$ then $\mu(A)=\sum_{\omega_i\in A}m_i\in[0,\infty]$ for every $A$ in $\mathcal F$ by closure property of addition over the real numbers.
+
+\item Suppose we have a sequence of disjoint sets $A_1, A_2, A_3 \ldots$. Then 
+\begin{align}
+\mu\left(\bigcup_{i=1}^\infty A_i\right) &= \sum_{\omega_k\in \bigcup_{i=1}^\infty} A_i\\
+ &= \sum_{i=1}^{\infty}\left(\sum_{\omega_k\in A_i} m_k\right)\label{eq:measures1}\\
+ &= \sum_{i=1}^{\infty} \mu(A_i)
+\end{align}
+This is what is happening in Eq. \eqref{eq:measures1}. The disjoint sets are the following:
+\begin{align*}
+A_1&=\{\omega_{11}, \omega_{12}, \omega_{13}, \ldots\}\\
+A_2&=\{\omega_{21}, \omega_{22}, \omega_{23}, \ldots \}\\
+\vdots
+\end{align*}
+Now,
+\begin{equation*}
+\sum_{\omega_k\in\bigcup_{i=1}^\infty A_i} m_k= (m_{11}+m_{12}+\cdots) + (m_{21}+m_{22}+m_{23}+\cdots) + \cdots
+\end{equation*}
+\end{prooflist}
+Note that the $m_{ij}'s$ are not necessarily different.
+
+Note also that this part is what is used in elementary probability (discrete).
+
+We now prove the second statement.
+
+Suppose $\mu$ is $\sigma$-finite. Then there exists $A_1, A_2, A_3, \ldots$ such that $\Omega=\bigcup_{i=1}^\infty A_i$ and $\mu(A_i)<\infty$ for all $i$. Fix $k$ and consider the singleton $\omega_k$. Then for some $i$, $\omega_k\in A_i$ and thus $m_k\leq \sum_{\omega_j\in A_j} m_j=\mu(A_i)<\infty$ since $\mu$ being $\sigma$-finite means that $\mu(A_i)$ is finite for all $i$. And so $m_k$ is finite. But $k$ is arbitrary so $m_i$ is finite for every $i$.
+
+Conversely, let $m_i<\infty$ for all $i$. Now,
+\begin{equation*}
+\Omega=\bigcup_{i=1}^\infty\{\omega_i\}\cup \left\{\Omega\setminus \bigcup_{i=1}^\infty \{\omega_i \}. \right\}
+\end{equation*}
+Note that 
+\begin{equation*}
+\mu(\{\omega_i\})=\sum_{\omega_k\in\{\omega_i\}}m_k=m_i<\infty.
+\end{equation*}
+Now
+\begin{equation*}
+\mu\left\{\Omega\setminus \bigcup_{i=1}^\infty\{\omega_i\} \right\} = \sum_{\omega_k\in\Omega\setminus\bigcup_{i=1}^\infty\{\omega_i\}}m_k=0.
+\end{equation*}
+Therefore, $\mu$ is $\sigma$-finite.
+\end{proof}
+
+
+\begin{example}
+Let $\mathcal F$ be the $\sigma$-algebra of all subsets of $\Omega$, and let $\mu(A)$ be the
+number of elements in $A$, where $\mu(A)=\infty$ if $A$ is not finite. This $\mu$ is counting 
+measure; it is finite if and only if $\Omega$ is finite and is $\sigma$-finite if and only if 
+$\Omega$ is countable.
+\end{example}
+
+\begin{proof}
+We first prove that $\mu$ is $\sigma$-finite.
+
+\begin{prooflist}
+\item $\mu(\varnothing)=0$ insce $\varnothing$ is finite and it has no elements.
+\item Let $A_1, A_2, \ldots$ be disjoint. Then
+\begin{equation*}
+\mu\left(\bigcup_{i=1}^\infty A_i \right)=
+	\begin{cases}
+	\sum_{i=1}^{\infty} \mu(A_i) & \text{if $\bigcup_{i=1}^\infty A_i$ is finite.}\\
+	\infty\left(=\sum_{i=1}^{\infty}\mu(A_i)\right) & \text{%
+		\begin{minipage}{3in}
+		if $\bigcup_{i=1}^\infty$ is infinite and alll $A_i$'s are finite(? Medyo duda ako rito. Hehe)
+		\end{minipage}
+		}\\
+	\infty\left(=\sum_{i=1}^{\infty} \mu(A_i) \right) & \text{if $\bigcup_{i=1}^\infty$ is infinite and at least one $A_i$ is infinite.}
+	\end{cases}
+\end{equation*}
+
+We shall now prove that $\Omega$ is $\sigma$-finite if and only if $\Omega$ is countable.
+
+Note that if $\Omega$ is countable then it is $\sigma$-finite by definition of a $\sigma$-finite.
+
+Suppose that $\Omega$ is $\sigma$-finite. Then there exists a sequence of disjoint sets $A_1, A_2, \ldots$ such that $\bigcup A_i=\Omega$ and $\mu(A_i)<\infty$. Now, this means that $\bigcup A_i=\Omega$ is a countable union of finite sets. Therefore, $\Omega$ is finite and hence countable.
+
+\end{prooflist}
+\end{proof}
+
+\begin{example}
+Let $\Omega=(0,1]$. For $A\subset \Omega$, say that $A\in \mathcal F$ if it may be written as a 
+finite union
+\begin{equation*}
+A=(a_1,b_1]\cup (a_2,b_2]\cup \cdots \cup (a_n,b_n]
+\end{equation*}
+where $0\leq a_1\leq b_1\leq \cdots \leq a_n\leq b_n\leq 1$. Then $\mathcal F$ is an algebra
+on $(0,1]$. For $A\subset \mathcal F$ define
+\begin{equation*}
+\mu(A)=\sum_{k=1}^{n}(b_k-a_k).
+\end{equation*}
+Then $\mu$ is a measure on $\mathcal F$.
+\end{example}
+
+Example 3 is much difficult to prove. We shall postpone its proof until we have tackled Caratheodory theory. The application of this example is the uniform distribution and is simply the application of the Lebesque measure. In other words, Lebesque measure is simply the uniform distribution\footnote{I am just making this up at this point. It is not so clear if this is what Prof. Dorado really said. Hehe.}.
+
+
+\begin{theorem}\label{thm:measures1}
+Let $(\Omega, \mathcal F, \mu)$ be a measure space. Then
+\begin{enumerate}[label=\roman*.]
+\item $\mu(A)\leq \mu(B)$ if $A\subset B$
+\item $\mu(\bigcup_{i\leq n}A_i)\leq \sum_{i\leq n}\mu(A_i)$ ($A_1,A_2,\ldots, A_n\in \mathcal F$).
+Furthermore, if $\mu(\Omega)<\infty$, then
+\item for $A_1, A_2,\ldots, A_n\in F$,
+\begin{equation}\label{eq:measures2}
+\begin{aligned}
+\mu\Biggl(\bigcup_{i\leq n}A_i\Biggl)&=\sum_{i\leq n}\mu(A_i)-\sum\sum_{i<j\leq n} \mu(A_i\cap A_j)\\
+ &+\sum\sum\sum_{i<j<k\leq n}\mu(A_i\cap A_j\cap A_k)-\\
+ &\cdots+(-1)^{n-1}\mu(A_1\cap A_2\cap\cdots\cap A_n)
+\end{aligned}
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+
+\begin{notes}
+\begin{enumerate}
+\item Part (ii) is called \emph{countable subadditivity}. 
+\item Part (iii) is called the \emph{inclusion-exclusion principle}.
+\item If $A_1, A_2, \ldots, A_n$ are disjoint then $\mu\left(\bigcup_{i=1}^n A_i\right)=\sum_{i=1}^{n}\mu(A_i)$.
+\item In the definition of the measure, take $B_i=A_i$, $i=1,2,\ldots, n$ and $B_i=\varnothing$ for $i>n$. Then 
+\begin{equation*}
+\mu\left(\bigcup_{i=1}^\infty A_i\right)=\mu\left(\bigcup_{i=1}^\infty B_i\right)=\sum_{i=1}^{\infty}\mu(B_i)=\sum_{i=1}^{n}\mu(A_i)
+\end{equation*}
+since $\mu(B_i)=0$ for $i>n$.
+\end{enumerate}
+\end{notes}
+
+To get an intuition about the proof, consider the figure below.
+
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+\clip(-2.26,-0.5) rectangle (4.24,5.7);
+\draw [rotate around={44.351396241109036:(1.08,2.65)}] (1.08,2.65) ellipse (2.6796150490747297cm and 1.9153685836485275cm);
+\draw [rotate around={45.:(0.59,2.19)}] (0.59,2.19) ellipse (1.7068269769155642cm and 1.2117170994612254cm);
+\begin{scriptsize}
+\draw[color=qqqqff] (0.52,4.88) node {$B$};
+\draw[color=qqqqff] (1.62,3.96) node {$A$};
+\end{scriptsize}
+\end{tikzpicture}
+\end{center}
+
+
+We now prove Theorem \eqref{thm:measures1}. Now the motivation for building the sequence of sets $B_n$'s is that we are building disjoint sets from the given sets, which might not be disjoint.
+
+Note that $\mu(A\cup B)\leq \mu(A)+\mu(B)$ should make sense because when we are adding $\mu(A)$ and $\mu(B)$, we are actually adding the intersection $\mu(A\cap B)$ twice in our count.
+
+We shall develop some more intuition about the procedure of building the disjoint sets $B_n$'s from the $A_n$'s. Consider the Venn Diagram below. We can shade the whole of set $A$ first and call this set $B_1$.
+\begin{center}
+\begin{venndiagram3sets}
+	\fillA
+\end{venndiagram3sets}
+\end{center}
+
+Part of $B$ and $C$ are taken and we don't want to add those parts again in the count later on. So in considering set $B$, we take only its part which does not intersect set $A$. And that is $B\setminus A$.
+\begin{center}
+\begin{venndiagram3sets}
+	\fillA \fillB
+\end{venndiagram3sets}
+\end{center}
+
+
+Finally, we take that part of $C$ that does not intersect $A$ and $B$ and that is $C\setminus (A\cup B)$.
+
+\begin{proof}
+\begin{prooflist}
+\item $B=A\cup B\setminus A$ and $A$ and $B\setminus A$ are disjoint. Hence 
+\begin{align*}
+\mu(B)&=\mu(A\cup (B\setminus A))\\
+&=\mu(A) + \mu(B\setminus A)\\
+&\geq \mu(A)
+\end{align*}
+\end{prooflist}
+
+\item We shall now build a sequence of sets that are decreasing and disjoint.
+
+Let
+\begin{align*}
+B_1&=A_1\\
+B_2&=A_2\setminus A_1\\
+B_3&=A_3\setminus (A_1\cup A_2)\\
+\vdots & \\
+B_k&= A_k\setminus(A_1\cup A_2\cup \cdots \cup A_{k-1})
+\end{align*}
+The $B_n$'s are disjoint and $B_k\subset A_k$. This implies that from part (i), $\mu(B_n)\leq \mu(A_n)$. Also by definition of the $B_n$'s, we have $\bigcup_{k=1}^n B_k=\bigcup_{k=1}^n A_n$. Hence,
+\begin{equation*}
+\mu\left(\bigcup_{k=1}^n A_k\right)=\mu\left(\bigcup_{k=1}^n B_k\right)=\sum_{k=1}^{n}\mu(B_i)\leq \sum_{k=1}^{n} \mu(A_i).
+\end{equation*}
+
+\item The proof is by mathematical induction.
+
+\begin{notes}
+\begin{enumerate}
+\item We have shown earlier that $\mu(A_1\cup A_2)=\mu(A_1)+\mu(A_2)-\mu(A_1\cap A_2)$.
+\item Note also that $\mu(A_1\cup A_2\cup A_3)=\mu(A_1)+\mu(A_2)+\mu(A_3)-\mu(A_1\cap A_2)-\mu(A_2\cap A_3)-\mu(A_1\cap A_3)+\mu(A_1\cap A_2\cap A_3)$. This should be intuitively explained. $A_1\cap A_2$ is both in $A_1$ and $A_2$ so it should be deducted since it was counted twice in $\mu(A_1)+\mu(A_2)+\mu(A_3)$. The same is true for $A_2\cap A_3$ and $A_1\cap A_3$. However, $A_1\cap A_2\cap A_3$ have been added deducted thrice from $\mu(A_1)+\mu(A_2)+\mu(A_3)$, and deducted thrice from $-\mu(A_1\cap A_2)-\mu(A_2\cap A_3)-\mu(A_1\cap A_3)$ so it should be added once to balance the equation.
+\end{enumerate}
+
+\end{notes}
+
+Since we have shown our inductive step (we showed the statement is true for $n=2$), we only need to show that the statement holds for $n=k+1$ if it holds for $n=k$.
+
+Assume the result is true for $n=k$, that is, it is true that
+\begin{equation}
+\begin{aligned}
+\mu\Biggl(\bigcup_{i\leq k}A_i\Biggl)&=\sum_{i\leq n}\mu(A_i)-\sum\sum_{i<j\leq k} \mu(A_i\cap A_j)\\
+&\cdots+(-1)^{k-1}\mu(A_1\cap A_2\cap\cdots\cap A_k)
+\end{aligned}
+\end{equation}
+Now,
+\begin{align*}
+\mu\left(\bigcup_{i=1}^{k+1}A_i\right)=&\mu\left(\bigcup_{i=1}^k A_i\cup A_{k+1}\right)\\
+ =&\mu\left(\bigcup_{i=1}^k A_i\right)+\mu(A_{k+1})-\mu\left(\left(\bigcup_{i=1}^k A_i\right) \cap A_{k+1}\right)\\
+ =&\mu\left(\bigcup_{i=1}^k A_i\right)+\mu(A_{k+1})-\mu\left(\bigcup_{i=1}^k (A_i\cap A_{k+1}) \right)\\
+ =&\sum_{i\leq k} \mu(A_i)-\sum_{i\leq j\leq k} \mu(A_i\cap A_j)+\cdots + (-1)^{k-1}\mu(A_1\cap A_2\cap \cdots \cap A_k)+\mu(A_{k+1})\\
+ &-\sum_{i=1k}^{max}\mu(A_i\cap A_{k+1})-\sum\sum_{i<j<k} \mu(A_i\cap A_j \cap A_{k+1})-\cdots \\
+ &-(-1)^{k-1}\mu(A_1\cap A_2\cap \cdots \cap A_{k+1})\\
+ &=\sum_{i=1}^{k+1}\mu(A_i)-\sum\sum_{i<j\leq k+1}\mu(A_i\cap A_j)+\cdots+(-1)^k\mu(A_1\cap A_2\cap \cdots \cap A_k\cap A_{k+1})
+\end{align*}
+which is the form of Eq. \eqref{eq:measures2} when $n=k+1$. Therefore, the result holds by mathematical induction.
+\end{proof}
+

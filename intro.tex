@@ -1,0 +1,313 @@
+\chapter{Lecture 1: Introduction}
+
+\section{Review on sets}
+\subsubsection{Set operations}
+
+\begin{description}
+\item [Union] $A\cup B=\{x \mid x\in A\, \mathrm{or}\, x\in B \}$
+\item[Intersection] $A\cap B= \{x \mid x\in A\, \mathrm{and}\, x\in B \}$
+\item[Difference] $A\setminus B= \{x \mid x\in A\, \mathrm{and}\, x\notin B \}$
+\item[Subset] $A\subset B$ if $x\in A$ implies $x\in B$
+\end{description}
+
+\begin{notes}
+\begin{enumerate}
+\item The following are some uses of the finite operations on sets in probability theory.
+\begin{enumerate}
+	\item $P(\lvert X\rvert \leq a)=P(\{X\leq a\}\cap \{X\geq -a\})$
+	\item $P(\lvert X\rvert > a)=P(\{X> a\}\cup \{X< -a\})$
+	\item $P(\min(X_1,X_2,\ldots,X_n)>a)=P(\bigcap_{i=1}^n\{X_i>a \})$
+	\item $P(\max(X_1,X_2,\ldots,X_n)>a)=P(\bigcup_{i=1}^n\{X_i>a \})$
+\end{enumerate}
+\item However, there are examples of results that cannot be expressed as a finite operations on sets. For example, suppose $S_n=X_1+X_2+\cdots+X_n$ of random variables $X_i$, $i=1,2,\ldots, n$. Then $P(\lim_{n\to\infty}\frac{S_n}{n}=\mu)=1$. This is known as the Strong Law of Large Numbers (SLLN). SLLN cannot be expressed as a finite operations on sets. De Morgan's Identities and the Distributive Laws on countably infinite sets enables us to express SLLN as a countable number of operations on sets.
+\end{enumerate}
+
+\end{notes}
+
+\subsubsection{De Morgan's Identities}
+
+\begin{equation}
+\left[\bigcup_{i=1}^\infty A_i\right]=\bigcap_{i=1}^\infty A_i^c
+\end{equation}
+and
+\begin{equation}
+\left[\bigcap_{i=1}^\infty A_i\right]=\bigcup_{i=1}^\infty A_i^c
+\end{equation}
+
+\subsubsection{Distributive Law}
+
+\begin{equation}
+A\cap\left(\bigcup_{i=1}^{\infty} B_i\right)=\bigcup_{i=1}^\infty(A\cap B_i)
+\end{equation}
+and
+\begin{equation}
+A\cup\left(\bigcap_{i=1}^{\infty} B_i\right)=\bigcap_{i=1}^\infty(A\cup B_i)
+\end{equation}
+
+
+\section{Algebra}
+
+\begin{definition}[Algebra]
+Let $\Omega$ be a nonempty set. A class $\mathcal F$ of subsets of $\Omega$ is called
+an algebra if
+\begin{enumerate}[label=\roman*.]
+	\item $\Omega \in \mathcal F$,
+	\item $A \in \mathcal F$ implies $A^c\in \mathcal F$,
+	\item $A,B\in \mathcal F$ implies $A\cup B\in \mathcal F$.
+\end{enumerate}
+\end{definition}
+
+
+
+\begin{definition}[$\sigma$-algebra]
+A class $\mathcal F$ of subsets of $\Omega$ is called a $\sigma$-algebra if $\mathcal F$
+is an algebra and $A_1$, $A_2\ldots \in \mathcal F$  implies $\bigcap_{i=1}^\infty A_i\in\mathcal F$.
+The pair $(\Omega, \mathcal F)$ is called a measurable space. The elements of a $\sigma$-algebra 
+$\mathcal F$ are called measurable sets.
+\end{definition}
+
+\begin{notes}
+\begin{enumerate}
+	\item Algebras are closed under any finite set of operations. E.g. $A\setminus B=A\cap B^c\in\mathcal F$.
+	\item $\sigma$-algebras are collection of subsets that are closed under countably infinite operations.
+	\item The smallest $\sigma$-algebra is the trivial $\sigma$-algebra, $\mathcal F=\{\Omega, \varnothing \}$. It is constructed as follows: Such smallest $\sigma$-algebra must contain $\Omega$ and its complement $\Omega^c=\varnothing$. So the smallest such $\sigma$-algebra must contain at least these two elements. It is easy to see that these two elements are enough to form a $\sigma$-algebra.
+	\begin{proof}
+	\begin{enumerate}[label=(\emph{\roman*})]
+		\item $\Omega\in \mathcal F$ by definition.
+		\item Let $E\in \mathcal F$. Then 
+		\begin{equation*}
+			E^c=
+			\begin{cases}
+			\varnothing & \text{if} \quad E=\Omega\\
+			\Omega & \text{if}\quad E=\varnothing
+			\end{cases}
+		\end{equation*}
+		In each of these cases, $E^c\in\mathcal F$.
+	\item Suppose $E_1, E_2,\ldots \in\mathcal F$, then
+		\begin{equation*}
+			\bigcup_{i=1}^\infty E_i=
+			\begin{cases}
+			\varnothing & \text{if} \quad E_i=\varnothing \; \forall i\\
+			\Omega & \text{if}\quad E_i=\Omega\; \text{for at least one}\; i
+			\end{cases}
+		\end{equation*}
+	\end{enumerate}
+	This completes the proof showing that the trivial $\sigma$-algebra is the smallest 
+	$\sigma$-algebra.
+	\end{proof}
+	\item The largest $\sigma$-algebra on $\Omega$ is the power set $\mathcal{P}(\Omega)$, 
+	the collection of all subsets of $\Omega$.
+\end{enumerate}
+\end{notes}
+
+\begin{example}
+Let $A\subset \Omega$. Then $\mathcal F=\{\varnothing, A, A^c, \Omega \}$ is a $\sigma$-algebra.
+\end{example}
+
+\begin{proof}
+\begin{enumerate}[label=\roman*.]
+\item $\Omega\in \mathcal F$ by definition.
+\item If $E\in \mathcal F$, then
+\begin{equation*}
+E^c=
+\begin{cases}
+\Omega & \text{if}\quad E=\varnothing\\
+A^c & \text{if} \quad E=A\\
+A & \text{if} \quad E=A^c\\
+\varnothing & \text{if} \quad E=\Omega
+\end{cases}
+\end{equation*}
+Whatever the case, $E^c\in \mathcal{F}$.
+\item Suppose a sequence of sets $E_1, E_2, E_3,\ldots \in \mathcal{F}$. Then,
+\begin{equation*}
+\bigcup_{i=1}^\infty =
+\begin{cases}
+\varnothing & \text{if} \quad E_i\in\mathcal{F}\quad \forall i\\
+\Omega & \text{if} \quad \exists i \ni E_i=\Omega\\
+A & \text{if}\quad E_i\neq \Omega\, \forall i, E_i\neq A^c\, \forall i, \exists i \ni E_i=A\\
+A^c & \text{if}\quad E_i\neq \Omega\, \forall i, E_i\neq A\, \forall i, \exists i\ni E_i=A^c\\
+\Omega & \text{if}\quad \exists i \ni E_i=A, \exists j \ni E_j=A^c, E_i\neq \Omega\, \forall i
+\end{cases}
+\end{equation*}
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+Let $\mathcal F$ consists of the finite and cofinite ($A$ being cofinite if $A^c$ is finite) 
+subsets of a set $\Omega$. Then $\mathcal F$ is an algebra. If $\Omega$ is finite then $\mathcal F$
+is also a $\sigma$-algebra. If $\Omega$ is infinite, however, then $\mathcal F$ is not a $\sigma$-algebra.
+\end{example}
+
+\begin{proof}
+\begin{enumerate}[label=\roman*.]
+\item $\Omega$ is cofinite since $\Omega^c=\varnothing$ which is finite. Thus, $\Omega\in\mathcal F$.
+\item Let $A\in\mathcal F$. Suppose $A$ is finite. Then $A^c$ is cofinite since $(A^c)^c=A$ and hence $A^c\in \mathcal F$. Now if $A$ is cofinite. Then $A^c$ is finite and hence, in $\mathcal F$.
+\item Let $A,B\in \mathcal F$. Then $A^c\in\mathcal F$ and $B^c\in \mathcal F$ from part (ii) above. By De Morgan's Law, we can replace the condition $A\cup B\in \mathcal F$ with $A\cap B\in F$. To see this, note that since $A^c\in \mathcal F$ and $B^c\in \mathcal F$, we may show that $\mathcal F$ is a $\sigma$-algebra if together with parts i and ii above, we have $A^c\cup B^c\in \mathcal F$ if and only if $(A^c\cup B^c)^c=(A^c)^c\cap (B^c)^c=A\cap B\in\mathcal F$. Now, if one of $A$ or $B$ is finite, say without loss of generality that $A$ is finite, then $A\cap B\subset A$ is finite. If both $A$ and $B$ are cofinite, then $A^c$ and $B^c$ are both finite, and so $A^c\cup B^c$ is also finite since the countable union of finite sets is finite. Therefore, $(A^c\cup B^c)^c=A\cap B$ is cofinite. In both cases, $A\cap B\in \mathcal F$.
+
+Therefore, $\mathcal F$ is an algebra.
+
+If $\Omega$ is finite, and suppose $A_1, A_2, A_3\cdots \in \mathcal F$. Note that $A_i\in\mathcal F$ for every $i$ if and only if $A_i^c\in\mathcal F$ for every $i$. So that $\bigcup_{i=1}^\infty A_i^c\in \mathcal F$ if and only if $\left(\bigcup_{i=1}^\infty A_i^c\right)^c\in \mathcal F=\left(\bigcap_{i=1}^\infty A_i\right)\in \mathcal F$. If at least one of the $A_i$'s are finite, say $A_k$, then $\left(\bigcap_{i=1}^\infty A_i\right)\subset A_k$ and hence $\left(\bigcap_{i=1}^\infty A_i\right)$ is finite. Therefore, $\left(\bigcap_{i=1}^\infty A_i\right)\in \mathcal F$. If each $A_i$ is cofinite, then each $A_i^c$ is finite. Therefore $\bigcup_{i=1}^\infty A_i^c$ is finite since the union of a countable collection of finite sets is finite. Therefore, $\left(\bigcup_{i=1}^\infty A_i^c\right)^c=\left(\bigcap_{i=1}^\infty A_i\right)$ is cofinite and hence in $\mathcal F$. Therefore, $\mathcal F$ is a $\sigma$-algebra.
+
+Suppose $\Omega$ is infinite. Without loss of generality, we can say that $\Omega=\{\omega_1,\omega_2,\omega_3,\omega_4,\ldots \}$. Let $A_i=\{\omega_{2i} \}$ for each $i$, then $A_i$ is finite for each $i$ and hence $A_i\in \mathcal F$. But $\bigcup A_i=\{\omega_{2}, \omega_4, \omega_6, \ldots \}$ which is infinite, and $\left(\bigcup A_i\right)^c=\{\omega_{1}, \omega_3, \omega_5, \ldots \}$ which is also infinite. Therefore, $\bigcup A_i=\{\omega_{2}, \omega_4, \omega_6, \ldots \}$ is neither finite nor cofinite and hence is not in $\mathcal F$. Therefore, if $\Omega$ is infinite, $\mathcal F$ is not a $\sigma$-algebra.
+\end{enumerate}
+\end{proof}
+
+Note that instead of determining whether or not $A\cap B\in \mathcal F$ in part ii of the proof that $\mathcal F$ is an algebra, we can see if $A\cup B\in \mathcal F$. If $A$ and $B$ rae finite, then $A\cup B$ is finite. If $A^c$ or $B^c$ is finite, then $A^c\cap B^c=(A\cup B)^c$ is finite, and hence, $A\cup B$ is cofinite and thus in $\mathcal F$. In both cases, $A\cup B\in \mathcal F$.
+
+%% Countable and co-countable sets
+
+\begin{example}
+Let $\mathcal F$ consists of the countable and co-countable ($A$ being co-countable if $A^c$ is countable) subsets of a set $\Omega$. Then $\mathcal F$ is a $\sigma$-algebra.
+\end{example}
+
+
+\begin{proof}
+\begin{enumerate}[label=(\emph{\roman*})]
+\item $\Omega\in\mathcal F$ because $\Omega^c=\varnothing$ is countable so $\Omega$ is co-countable.
+\item Let $A\in \mathcal F$. If $A$ is countable, then $A^c$ is co-countable and hence $A^c\in \mathcal F$. If $A$ is co-countable, then $A^c$ is countable and hence in $\mathcal F$. In both cases, $A^c\in\mathcal F$.
+\item Let $A_1, A_2, A_3, \ldots \in \mathcal F$. Suppose $A_i^c$ is countable for at least one $i$, say $k$, such that $A_k^c$ is countable. Then $\bigcap_{i=1}^\infty A_i^c\subset A_k^c$. Therefore, $\bigcap_{i=1}^\infty A_i^c$ is countable. Hence, $\left(\bigcap_{i=1}^\infty A_i^c\right)^c=\bigcup_{i=1}^\infty A_i$ is co-countable. If $A_i$ is countable for each $i$ then $\bigcup_{i=1}^\infty A_i$ is countable since the countable union of countable sets is countable. In either case, $\bigcup_{i=1}^\infty A_i\in \mathcal F$. Therefore, $\mathcal F$ is a $\sigma$-algebra.
+\end{enumerate}
+\end{proof}
+
+In part (iii), we may also argue (Prof. Dorado did) as follows. Suppose $A_i$ is countable for some $i$, say for $i=k$. Then $\left(\bigcup_{i=1}^\infty A_i^c\right)^c=\bigcap_{i=1}^\infty A_i\subset A_k$ is countable. This implies that $\bigcup_{i=1}^\infty A_i^c$ is co-countable. Suppose now that $A_i$ is co-countable for every $i$. Then $A_i^c$ is countable for every $i$. So $\bigcup_{i=1}^\infty A_i^c$ is countable and so $\left(\bigcup_{i=1}^\infty A_i^c\right)^c=\bigcap_{i=1}^\infty$ is co-countable. In both cases, $\bigcap_{i=1}^\infty A_i\in\mathcal F$. 
+
+
+\begin{definition}[$\sigma$-algebra generated by $\mathcal C$]
+Let $\mathcal C$ be a class of subsets of $\Omega$. Then $\sigma(\mathcal C)$, the $\sigma$-algebra 
+generated by $\mathcal C$, is the smallest $\sigma$-algebra $\mathcal F$ on $\Omega$ such that $\mathcal C\subset \mathcal F$.
+\end{definition}
+
+\begin{theorem}
+The $\sigma$-algebra generated by $\mathcal C$ is the intersection of all $\sigma$-algebras on 
+$\Omega$ containing $\mathcal C$.
+\end{theorem}
+
+\begin{proof}
+Define $\bigcap\mathcal F=\bigcap \{\mathcal F \mid \mathcal F\, \text{is a}\, \sigma\text{-algebra of subsets of}\; \Omega\; \text{and}\; \mathcal C\subset \mathcal F  \}$. We need to show that this is a $\sigma$-algebra and that it is the smallest $\sigma$-algebra on $\Omega$ containing $\mathcal C$.
+
+Let us prove first that $\bigcap \mathcal F$ is indeed a $\sigma$-algebra.
+\begin{enumerate}[label=(\emph{\roman*})]
+\item $\Omega \in \mathcal F$ for any $\sigma$-agebra and hence, $\Omega\in\bigcap \mathcal F$.
+\item Suppose $A\in \mathcal F$ with $\mathcal F$ a $\sigma$-algebra and $\mathcal C\subset \mathcal F$. Then $A^c\in\mathcal F$. Since $\mathcal F$ is arbitrary, then $A^c\in\bigcap\mathcal F$.
+\item Now let $A_1, A_2, A_3,\ldots \in \bigcap\mathcal F$. Then for any $\mathcal F$ in the intersection, $A_1, A_2, A_3, \ldots \in \mathcal F$. Since $\mathcal F$ is a $\sigma$-algebra then $\bigcup_{i=1}^\infty A_i\in\mathcal F$ and therefore, $\bigcup_{i=1}^\infty A_i\in \bigcap \mathcal F$. Therefore, $\bigcup \mathcal F$.
+\end{enumerate}
+We now show that $\bigcap\mathcal F$ is the smallest such $\sigma$-algebra and hence $\sigma(\mathcal C)=\bigcap\mathcal F$.
+
+Clearly, $\mathcal C\subset \bigcap \mathcal F$ by definition. Let $\mathcal G$ be a $\sigma$-algebra with $\mathcal C\subset \mathcal G$. Therefore $\mathcal G$ is one of the $\sigma$-algebras in the intersection and thus, since $\mathcal F$ is arbitrary, $\bigcap \mathcal F\subset \mathcal G$. Therefore, $\sigma(\mathcal C)=\bigcap \mathcal F$.
+\end{proof}
+
+\begin{example}\label{eg:1}
+The Borel $\sigma$-algebra $\mathcal B$ on $\mathbb{R}$ is defined as the smallest $\sigma$-algebra
+containing the open sets in $\mathbb R$. An open set in $\mathbb R$ is either empty or a disjoint 
+union of a countable collection of open intervals. This $\sigma$-algebra is generated by the 
+collection $\pi(\mathbb R)$ defined by
+\begin{equation}
+\pi(\mathbb R)=\{(-\infty, x] \mid x\in \mathbb R \}.
+\end{equation}
+The elements of $\mathcal B$ are called Borel sets.
+\end{example}
+
+\begin{notes}
+\begin{enumerate}[label=\arabic*.]
+\item Borel $\sigma$-algebra is the most important $\sigma$-algebra for mathematics in statistics.
+\item To get an idea about the first note, we recall the standard normal density
+\begin{align*}
+F(a)&=\int_{-\infty}^{a}\frac{1}{\sqrt{2\pi}}e^{x^2/2}\, dx\\
+ &=P(X\leq a)\\
+ &=P(X\in (-\infty,a])
+\end{align*}
+\end{enumerate}
+\end{notes}
+
+\paragraph{Second meeting: February 17, 2016}
+
+\begin{definition}[$\pi$-system, $d$-system]
+Let $\Omega$ be a nonempty set. A collection $\mathcal J$ of subsets of $\Omega$ is called a 
+$\pi$-system if whenever $A,B\in \mathcal J$ we have $A\cap B\in \mathcal J$. A collection $\mathcal D$ of 
+subsets of $\Omega$ is called a $d$-system if
+\begin{enumerate}[label=\roman*.]
+\item $\Omega \in \mathcal D$,
+\item $A, B\in\mathcal D$ and $A\subset B$ implies $B\setminus A\in \mathcal D$,
+\item $A_1, A_2,\ldots \in \mathcal D$ and $A_1\subset A_2\subset \cdots$ implies $\bigcup_{i=i}^\infty A_i\in \mathcal D$.
+\end{enumerate}
+\end{definition}
+
+\begin{notes}
+$\pi(\mathbb R)$ of Example \eqref{eg:1} is termed as such because it is a $\pi$-system.
+\end{notes}
+
+\begin{proof}
+It is easy to show that $\pi(\mathbb R)$ is a $\pi$-system. We need to show that for any two sets $A, B\in \pi(\mathbb R)$, we must have $A\cap B\in \pi(\mathbb R)$.
+
+Now, let $A,B\in\pi(\mathbb R)$, then for some $x,y\in\mathbb R$ we have $A=(-\infty,x]$ and $B=(-\infty,y]$. Without loss of generality, assume that $x<y$. Then $A=(-\infty,x]\subset (-\infty,y]= B$ and so $A\cap B=(-\infty,x]\cap(-\infty,y]=(-\infty,x]\in \pi(\mathbb R)$. Therefore, $\pi(\mathbb R)$ is a $\pi$-system.
+\end{proof}
+
+$\sigma$-algebra is still a difficult concept and we wanted to work with some much easier concepts in order to deal more easily with some proofs. This is the motivation for working with with $d$-systems and $\pi$-systems because it is easier to check whether a collection of sets is a $d$-system or a $\pi$-system than it is to check directly if it is a $\sigma$-algebra. Such is the spirit of Theorem \eqref{thm:2}.
+
+\begin{theorem}\label{thm:2}
+A collection $\mathcal F$ of subsets of $\Omega$ is a $\sigma$-algebra if and only if $\mathcal F$ is 
+both a $\pi$-system and a $d$-system.
+\end{theorem}
+
+\begin{proof}
+Let us suppose first that $\mathcal F$ is a $\sigma$-algebra. We will show that it is both a $\pi$-system and a $d$-system. We have shown this a lot of times but we will show the reasoning again.
+
+Suppose $A, B\in \mathcal F$ and that $\mathcal F$ is a $\sigma$-algebra. Then since $\mathcal F$ is a $\sigma$-algebra, we also have $A^c, B^c\in \mathcal F$, and, thus, $A^c\cup B^c\in \mathcal F$. This means that, by De Morgan's Law, $A\cap B=(A^c\cup B^c)^c\in\mathcal F$. Therefore, $\mathcal F$ is a $\pi$-system. 
+
+Condition (i) is the same for both $d$-system and $\sigma$-algebra. If $A, B\in \mathcal F$, then, again, using the same reasoning as above, we know that $B\cap A^c\in\mathcal F$. Therefore, $B\setminus A=B\cap A^c\in\mathcal F$ and so condition (ii) of the $d$-system is satisfied. Finally, condition (iii) of the $\sigma$-algebra is a more general statement than that of condition (iii) of the $d$-system. Therefore, condition (iii) of the $\sigma$-algebra satisfies condition (iii) of the $d$-system. Therefore, $\mathcal F$ is also a $d$-system.
+
+
+Suppose now that $\mathcal F$ is both a $\pi$ and a $d$-system.
+
+\begin{prooflist}
+\item $\Omega\in\mathcal F$ by definition of a $d$-system.
+\item Now suppose $A\in \mathcal F$. Then $A^c=\Omega\setminus A$. But since $\Omega\in\mathcal F$ and $A\subset \Omega$, by property (ii) of a $d$-system, then $A^c\in \mathcal F$.
+\item Now let $A_1,A_2,A_3,\ldots$ be in $\mathcal F$. Note that we don't know if $\{A_i\}$ is increasing. So we create a sequence of sets that are increasing as follows. Define
+\begin{align*}
+B_1&=A_1\\
+B_2&=A_1\cup A_2\\
+B_3&=A_1\cup A_2 \cup A_3\\
+&\vdots  \\
+B_n&=A_1\cup A-2\cup A_3 \cup \cdots \cup A_n\\
+&\vdots
+\end{align*} 
+Then $B_1\subset B_2\subset B_3\subset \cdots$. Now, for any $n\geq 1$, $B_n=A_1\cup A_2\cup \cdots \cup A_n=\bigcup_{i=1}^n A_i=\left(\bigcap_{i=1}^n A_i^c\right)^c = \Omega\setminus \left(\bigcap_{i=1}^n A_i^c\right) $. Now, $\mathcal F$ is a $\pi$-system, so $\bigcap_{i=1}^n A_i^c\in\mathcal F$. Also, $\bigcap_{i=1}^n A_i^c\subset \Omega$, therefore, by property (ii) of a $d$-system, $\Omega\setminus \left(\bigcap_{i=1}^n A_i^c\right)\in \mathcal F$. Now, $\{B_i\}$ is an increasing sequence of sets that are in $\mathcal F$. Therefore, $\bigcup_{i=1}^\infty A_i=\bigcup_{i=1}^\infty B_i\in \mathcal F$ by property (iii) of a $d$-system. Therefore, $\mathcal F$ is a $\sigma$-algebra.
+\end{prooflist}
+
+\end{proof}
+
+\begin{theorem}\label{thm:3}
+If $\mathcal J$ is a $\pi$-system and $\mathcal D$ is a $d$-system with $\mathcal J\subset \mathcal D$, then $\sigma(\mathcal J)\subset \mathcal D$.
+\end{theorem}
+
+\begin{notes}
+$\sigma(\mathcal J)\subset \mathcal D$ means that $\D$ contains the smallest $\sigma$-algebra contained in $\J$. 
+\end{notes}
+
+\begin{proof}
+To show $\sigma(\J)\subset \D$, we need only show that $\D$ is a $\pi$-system. Why? If $\D$ is a $\pi$-system, then, since it is also a $d$-system, then it is a $\sigma$-algebra. $\sigma(\J)$ and $\D$ both being $\sigma$-algebras and $\sigma(\J)$ being the smallest $\sigma$-algebra containing $\J$ means $\sigma(\J)\subset \D$.
+
+Now without loss of generality, we can also let $\D$ be the smallest such $d$-system that contains $\J$. If it holds that $\sigma(\J)\subset \D$ for this $\D$ then it will hold for other bigger $\D$'s.
+
+Consider $\F=\{A\in\D\mid A\cap B\in\D\; \text{for all}\; B\in\J \}$. We need to show that $\J\subset \F$ and $\F$ is a $d$-system.
+
+Note than since $\J$ is a $\pi$-system, for $A\in\J$ then $A\cap B\in\J\subset \D$ for all $B\in\J$. Hence, $A\in\F$ and $\J\subset\F$.
+
+We now proceed to show that $\F$ is a $d$-system. 
+\begin{prooflist}
+	\item Now $\Omega\cap B=B\in\J$ for all $B\in\J$ and hence $\Omega\in\F$.
+	\item Moreover, if $A,C\in\F$ and $A\subset C$ then for any $B\in \J$, $(C\setminus A)\cap B=(C\cap B)\setminus (A\cap B)$. Now $C\cap B\in \D$ and $A\cap B \D$ by definition of $\F$. So $(C\setminus A)\cap B\in \D$ since $\D$ is a $d$-system. Thus $C\setminus A$ satisfies the condition of $\F$ so $C\setminus A\in \F$.
+	\item $A_1, A_2, \ldots \in\F$ and $A_1\subset A_2\subset\cdots$. Then for any $B\in\J$, $\left(\bigcup_{i=1}^\infty A_i\right)\cap B = \bigcup_{i=1}^\infty(A_i\cap B)$. Now $A_i\cap B\in\D$ for all $i$ since $A_i\in\F$ and $(A_1\cap B)\subset (A_2\cap B)\subset (A_3\cap B)\subset \cdots$. This means that $\left(\bigcup_{i=1}^\infty A_i\right)\cap B=\bigcup_{i=1}^\infty(A_i\cap B)\in\D$, since $\D$ is a $d$-system. Therefore, $\left(\bigcup_{i=1}^\infty A_i\right)\in\F$. Therefore, $\F$ is a $d$-system.
+\end{prooflist}
+
+
+Now since $\D$ is the smallest $d$-system containing $\J$, and $\J\subset\D$ it follows from the condition we set on $\D$ that $\F=\D$. Therefore, if $A\in\D$ and $B\in\J$, then $A\cap B\in\D$.
+
+Now define $\G=\{B\in\D\mid A\cap B\in\D\; \text{for all}\; A\in\D  \}$. Note that $\J\subset\G$. Also $\G\subset\D$ by definition of $\G$. We can show in a similar fashion that $\G$ is a $d$-system (see Exercise \ref{exer:1}). Hence, $\G=\D$. Therefore, if $A\in\F=\D$ and $B\in\G=\D$ then $A\cap B\in\D$ and hence $\D$ is a $\pi$-system. Now $\D$ is then both a $\pi$-system and a $d$-system, and, whence, a $\sigma$-algebra. Therefore, $\sigma(\J)\subset\D$.
+\end{proof}
+
+\section*{Exercises}
+
+\begin{enumerate}
+\item\label{exer:1} Show that $\G=\{B\in\D\mid A\cap B\in\D\; \text{for all}\; A\in\D  \}$ in the proof of Theorem \eqref{thm:3} is a $d$-system.
+\end{enumerate}

@@ -1,0 +1,133 @@
+\chapter{Continuity and uniqueness}
+
+\begin{theorem}\label{thm:cont1}
+Let $\mu$ be a measure on a $\sigma$-algebra $\mathcal F$.
+\begin{enumerate}
+\item If $\{A_n \}$ is an increasing sequence in $\mathcal F$ with $A=\bigcup A_n$ then $\lim\limits_{n\to\infty}\mu(A_n)=\mu(A)$.
+
+\item If $\{A_n \}$ is a decreasing sequence in $\mathcal F$ with $A=\bigcap A_n$ and $\mu(A_k)<\infty$ for some $k$ then $\lim\limits_{n\to\infty}\mu(A_n)=\mu(A)$.
+
+\item If $\{A_n \}$ is a sequence in $\mathcal F$ then 
+\begin{equation*}
+\mu\left(\bigcup_{n=1}^\infty A_n\right)\leq \sum_{n=1}^{\infty}\mu(A_n).
+\end{equation*}
+\end{enumerate}
+\end{theorem}
+
+\begin{notes}
+Recall from function theory that $f(x)$ is continuous at $x_0$ if $\lim\limits_{x\to x_0}f(x)=f(x_0)=f(\lim\limits_{x\to x_0} x)$. Note that the $\lim$ notation go in and out of the function notation. Think of $\bigcup$ as a function so that 
+\begin{equation*}
+\bigcup_{n=1}^\infty A_n=\lim\limits_{n} A_n
+\end{equation*}
+and
+\begin{equation*}
+Pr(\lim\limits_{n}A_n)=\lim\limits_{n} Pr(A_n).
+\end{equation*}
+\end{notes}
+
+We now prove Theorem \ref{thm:cont1}.
+
+\begin{proof}
+\begin{prooflist}
+\item  Use the figure below to visualize the construction of sets.
+\begin{center}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+	\clip(-3.19706,-0.94824) rectangle (6.78544,8.10256);
+	\draw [rotate around={44.351396241109036:(1.08,2.65)}] (1.08,2.65) ellipse (2.6796150490747297cm and 1.9153685836485275cm);
+	\draw [rotate around={45.:(0.59,2.19)}] (0.59,2.19) ellipse (1.7068269769155642cm and 1.2117170994612254cm);
+	\draw [rotate around={47.51687565693951:(1.42,3.12)}] (1.42,3.12) ellipse (3.6709411373657046cm and 2.614996908985517cm);
+	\draw [rotate around={42.305715710143915:(2.07,3.59)}] (2.07,3.59) ellipse (4.779126039735247cm and 3.1314925680377277cm);
+	\begin{scriptsize}
+	\draw[color=qqqqff] (0.55636,4.98802) node {$A_2$};
+	\draw[color=qqqqff] (1.64778,4.10956) node {$A_1$};
+	\draw[color=qqqqff] (0.4765,6) node {$A_3$};
+	\draw[color=qqqqff] (0.4765,6.87804) node {$A_4 \vdots$};
+	\end{scriptsize}
+	\end{tikzpicture}
+\end{center}
+ Let $B_1=A_1$, $B_n=A_n\setminus A_{n-1}$, $n>1$. Then the $B_n$'s are disjoint with $\bigcup B_n=\bigcup A_n$. Henc
+\begin{align}
+\mu(A)=& \mu\left(\bigcup_{i=1}^\infty B_i\right)=\sum_{i=1}^{\infty}\mu(B_i)=\lim\limits_{n\to\infty}\sum_{i=1}^{n}\mu(A_i\setminus A_{i-1})\\
+=&\lim\limits_{n\to\infty}\sum_{i=1}^{\infty}[\mu(A_i)-\mu(A_{i-1})]\quad \text{since $A_i\subset A_i$}\label{eq:cont1}\\
+=&\lim\limits_{n\to\infty}\mu(A_n)\label{eq:cont2}
+\end{align}
+To see how \eqref{eq:cont2} was arrived at from \eqref{eq:cont1}, the summation in \eqref{eq:cont1} expands to
+\begin{equation*}
+\mu(A_1)+[\mu(A_2)-\mu(A_1)]+[\mu(A_3)-\mu(A_2)]+\cdots+[\mu(A_{n-1})-\mu(A_{n-2})]+[\mu(A_n)-\mu(A_{n-1})]=\mu(A_n)
+\end{equation*}
+This technique is called \emph{telescoping} and is used a lot in probability theory.
+
+\item Consider the figure below.
+
+\begin{center}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+	\clip(-3.19706,-0.94824) rectangle (6.78544,8.10256);
+	\draw [rotate around={44.351396241109036:(1.08,2.65)}] (1.08,2.65) ellipse (2.6796150490747297cm and 1.9153685836485275cm);
+	\draw [rotate around={45.:(0.59,2.19)}] (0.59,2.19) ellipse (1.7068269769155642cm and 1.2117170994612254cm);
+	\draw [rotate around={47.51687565693951:(1.42,3.12)}] (1.42,3.12) ellipse (3.6709411373657046cm and 2.614996908985517cm);
+	\draw [rotate around={42.305715710143915:(2.07,3.59)}] (2.07,3.59) ellipse (4.779126039735247cm and 3.1314925680377277cm);
+	\begin{scriptsize}
+	\draw[color=qqqqff] (0.55636,4.98802) node {$A_{k+2}$};
+	\draw[color=qqqqff] (1.64778,4.10956) node {$A_{k+3}\vdots$};
+	\draw[color=qqqqff] (0.4765,6) node {$A_{k+1}$};
+	\draw[color=qqqqff] (0.4765,6.87804) node {$A_k$};
+	\end{scriptsize}
+	\end{tikzpicture}
+\end{center}
+ Let $B_n= A_k\setminus A_n$, $n>k$. Then $\{B_n\}_{n>k}$ is an increasing sequence and 
+\begin{align}
+\mu(A_k)-\lim\limits_{n\to\infty}\mu(A_n)=&\lim\limits_{n\to\infty}[\mu(A_k)-\mu(A_n)]=\lim\limits_{n\to\infty}\mu(A_k\setminus A_n)=\lim\limits_{n\to\infty}\mu(B_n)\\
+=&\mu\left(\bigcup_{n=k+1}^\infty B_n\right)=\mu\left(\bigcup_{n=k+1}^\infty(A_k\setminus A_n)\right)=\mu\left(\bigcup_{i=k+1}^\infty (A_k\cup A_n^c)\right)\\
+=&\mu\left(A_k\cap \bigcup_{n=k+1}^\infty A_n^c\right)=\mu\left(A_k\cap\left(\bigcap_{n=k+1}^\infty A_n\right)^c\right)\\
+=&\mu\left(A_k\setminus \left(\bigcap_{n=k+1}^\infty A_n\right)\right)=\mu(A_k)-\mu\left(\bigcup_{n=k+1}^\infty A_n\right)\\
+=&\mu(A_k)-\mu\left(\bigcap_{n=1}^\infty A_n\right)\quad\text{since $\bigcap_{n=1}^\infty A_n\subset \bigcap_{n=k+1}^\infty A_n$}
+\end{align}
+
+\item Let $B_n=\bigcup_{i=1}^n A_i$ then by continuity
+\begin{align*}
+\mu(B_n)&=\mu\left(\bigcup_{n=1}^\infty A_n\right)=\lim\limits_{n\to\infty} \mu(B_n)\leq \lim\limits_{n\to\infty}\sum_{i=1}^{n}\mu(A_i)=\sum_{n=1}^{\infty}\mu(A_n)
+\end{align*}
+\end{prooflist}
+\end{proof}
+
+\begin{theorem}\label{thm:cont2}
+Let $\Omega$ be a set. Let $\mathcal J$ be a $\pi$-system on $\Omega$. Let $\mathcal F=\sigma(\mathcal J)$. Suppose that $\mu_1$ and $\mu_2$ are measures on $(\Omega, \mathcal F)$ such that $\mu_1(\Omega)=\mu_2(\Omega)<\infty$ and $\mu_1=\mu_2$ on $\mathcal J$. Then $\mu_1=\mu_2$ on $\mathcal F$.
+\end{theorem}
+
+\begin{notes}
+This guarantees as far as Borel sets are concerned that probability distributions are unique\footnote{Again, I am partly making this up. I don't know if this is what is exactly what Prof. Dorado said. Hehe.}.
+\end{notes}
+
+Here is the proof of Theorem \ref{thm:cont2}.
+
+\begin{proof}
+Let $\mathcal G=\{A\in \mathcal F\mid \mu_1(A)=\mu_2(A)\}$.
+\begin{prooflist}
+\item
+
+Let $A, B\in \mathcal G$ with $A\subset B$ then
+\begin{align}
+m_1(B\setminus A)&=\mu_1(B)-\mu_1(A)\\
+&=\mu_2(B)-\mu_2(A)\\
+&=\mu(B\setminus A)
+\end{align}
+Hence, $B\setminus A\in \mathcal G$.
+\item 
+
+
+
+ Let $\{A_n\}$ be an increasing sequence in $\mathcal G$. Then
+\begin{align*}
+\mu\left(\bigcup_{n=1}^\infty A_n\right)&=\lim\limits_{n\to\infty}(A_n)\\
+&=\lim\limits_{n\to\infty} \mu_2(A_n)\\
+&=\mu_2\left(\bigcup_{n=1}^\infty A_n\right)
+\end{align*}
+Hence $\bigcup_{n=1}^\infty A_n\in\mathcal G$. Then $\mathcal G$ is a $d$-system containing the $\pi$-system containing $\mathcal J$. Hence, $\mathcal F=\sigma(\mathcal J)$.
+\end{prooflist}
+\end{proof}
+
+What follows is an immediate result.
+
+\begin{corollary}
+If two probability measures agree on a $\pi$-system, then they agree on the $\sigma$-algebra by that $\pi$-system.
+\end{corollary}

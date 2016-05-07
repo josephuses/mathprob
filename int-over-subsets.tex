@@ -1,0 +1,141 @@
+\chapter{Integrals over Subsets}
+
+\begin{lemma}
+Let $T$ be a measurable map from $(\Omega_1, \F_1, \mu)$ to $(\Omega, \F_2)$. For $A\in\F_2$ define
+\begin{equation*}
+(\mu\circ T^{-1})(A)=\mu(T^{-1}(A)).
+\end{equation*}
+Then $\mu\circ T^{-1}$ is a measure on $(\Omega_2, \F_2)$.
+\end{lemma}
+
+
+
+\begin{proof}
+For disjoint elements $A_1$, $A_2$, \ldots of $\F_2$ we have
+\begin{align*}
+(\mu\circ T^{-1})\left(\bigcup_n A_n \right) & = \mu\left(T^{-1}\left(\bigcup_n A_n\right)\right)\\
+ &= \mu\left(\bigcup_n T^{-1}(A_n) \right)\\
+ &= \sum_n \mu(T^{-1}(A_n))\\
+ &=\sum_n (\mu\circ T^{-1})(A_n).
+\end{align*}
+\end{proof}
+
+
+
+
+\begin{theorem}[Change of Variable]
+Let $T$ be a measurable map from $(\Omega_1, \F_1, \mu)$ to $(\Omega_2, \F_2)$. Let $f$ be a measurable function on $\Omega_2$. Then
+\begin{equation*}
+\int fd(\mu\circ T^{-1})=\int f\circ T d\mu
+\end{equation*}
+if either integral is defined (possibly infinite).
+\end{theorem}
+
+
+
+
+\begin{proof}
+For $f=I_A$, note that $f\circ T=I_{T^{-1}(A)}$ and, hence, 
+\begin{equation*}
+\int fd(\mu\circ T^{-1})=(\mu\circ T^{-1})(A)=\mu(T^{-1}(A))=\int f\circ Td\mu.
+\end{equation*}
+By linearity of the integral, the result is then true for simple function $f$. Let $f$ be a nonnegative measurable function and $g_1$, $g_2$, \ldots\ be an increasing sequence of simple functions with limit $f$. Then by MCT
+\begin{align*}
+\int fd(\mu\circ T^{-1})&=\int f^+d(\mu\circ T^{-1})-\int f^{-}d(\mu\circ T^{-1})\\
+ &=\int f^+\circ Td\mu - \int f^-\circ Td\mu\\
+ &=f\circ T d\mu.
+\end{align*}
+\end{proof}
+
+
+\begin{definition}[Lebesque integral]
+The integral of $f$ over a set $A$ in $\F$ is defined by
+\begin{equation*}
+\int_A fd\mu = \int fI_A d\mu
+\end{equation*}
+If $\lambda$ is Lebesque measure then the integral $\int_{[a,b]}f d\lambda$ is called the Lebesque integral of $f$ and is usually denoted by $\int_{a}^{b} f(x)dx$.
+\end{definition}
+
+
+
+\begin{theorem}
+Let $f$ be a bounded function defined on the closed, bounded interval $[a,b]$. If $f$ is Riemann integrable over $[a,b]$, then it is Lebesque integrable over $[a,b]$ and the two integrals are equal.
+\end{theorem}
+
+
+
+\begin{definition}[Lebesque-Stieltjes integral]
+Let $F$ be a nondecreasing and right-continuous function on $\Re$. Define $\mu_F((x,y])=F(y)-F(x)$ for $x\leq y$. Then the integral $\int_{[a,b]}f d\mu_F$ is called the Lebesque-Stieltjes integral of $f$ with respect to $F$ and is usually denoted by $\int_{a}^{b}f(x)dF(x)$.
+\end{definition}
+
+
+
+\begin{lemma}
+If $A_1$, $A_2$, \ldots are disjoint, and if $f$ is either nonnegative or integrable, then
+\begin{equation*}
+\int_{\bigcup_n A_n} fd\mu = \sum_n \int_{A_n} f d\mu.
+\end{equation*}
+\end{lemma}
+
+
+
+
+\begin{proof}
+\begin{align*}
+\int_{\bigcup_n A_n} f d\mu &= \int fI_{\bigcup_n A_n} d\mu\\
+	&=\lim\limits_{N\to\infty}\inf fI_{\bigcup_{n=1}^N A_n}d\mu\\
+	&=\lim\limits_{N\to\infty}\sum_{n=1}^{N}\int f I_{A_n}d\mu\\
+	&=\sum_n\int_{A_n} f d\mu.
+\end{align*}
+\end{proof}
+
+
+
+\begin{theorem}
+Let $f$ be a nonnegative measurable function. Define the set function $\nu$ on $\F$ by
+\begin{equation*}
+\nu(A)=\int_A f d\mu.
+\end{equation*}
+Then $\nu$ is a measure.
+\end{theorem}
+
+
+
+
+\begin{proof}
+From the lemma
+\begin{equation*}
+\nu\left(\bigcup A_n\right)=\sum \int_{A_n} f d\mu = \sum \nu(A_n)
+\end{equation*}
+for disjoint $A_1$, $A_2$, \ldots in $\F$.
+\end{proof}
+
+
+
+\begin{remark}
+We say that the measure $\nu$ has density $f$ relative to $\mu$, and write $d\nu/d\mu=f$. Moreover, note that for $E$ in $\F$, $\mu(E)=0$ implies that $\nu(E)=0$.
+\end{remark}
+
+
+
+
+\begin{theorem}[Chain Rule]
+Let $f$ be a nonnegative measurable function and suppose that $f=d\nu/d\mu$. If 
+$g$ is a measurable function. Then
+\begin{equation*}
+\int gd\nu = \int gfd\mu.
+\end{equation*}
+whenever either side exists.
+\end{theorem}
+
+
+
+\begin{proof}
+For $g=I_A$, we have
+\begin{equation*}
+\int gd\nu=\nu(A)=\int_A fd\mu = \int gfd\mu.
+\end{equation*}
+By linearity of integrals, it follows that the result is true for simple functions.
+That result follows for nonnegative unctions now follows from MCT the fact that any 
+nonnegative function is an increasing limit of simple functions. finally, the result follows for integrable $f$ by applying the equation to $f^+$ and $f^-$, separately.
+\end{proof}

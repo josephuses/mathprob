@@ -1,0 +1,135 @@
+\chapter{Limit Theorems on Integrals}
+
+\begin{theorem}[Monotone Convergence Theorem]
+If $\{f_n\}$ is an increasing sequence of nonnegative measurable functions such that 
+$\lim\limits_{n\to\infty} f_n=f$, then $\lim\limits_{n\to\infty}\int f_nd\mu = \int fd\mu$.
+\end{theorem}
+
+\begin{proof}
+For each $n$, take increasing simple functions $\{f_{mn}\}$ with $\lim_{m\to\infty}f_{mn}=f_n$. Define $g_n=\max(f_{1n}, f_{2n}, \ldots,f_{nn})$. Then 
+$\{g_n\}$ is an increasing sequence of simple functions with $\lim_{n\to\infty}g_n=f$. 
+It follows that $\lim_{n\infty}\inf g_nd\mu=\inf fd\mu$. Since $g_n\leq f_n\leq f$, we get $\int fd\mu=\lim\limits_{n\to\infty}\int g_n\leq \lim\limits_{n\to\infty}\int f_nd\mu\leq \int fd\mu$. This implies that $\lim\limits_{n\to\infty}\int f_nd\mu=\int fd\mu$.
+\end{proof}
+
+
+
+\begin{lemma}
+Let $f$ be a nonnegative measurable function and $N\in \F$ with $\mu(N)=0$. Then $\int fI_Nd\mu=0$.
+\end{lemma}
+
+\begin{proof}
+Let $\{f_n\}$ be a sequence of simple functions with $\lim\limits_{n\to\infty}f_n=f$. Then $\{f_n I_N\}$ is an increasing sequence of simple functions with $\lim_{n\to\infty}f_NI_N=fI_N$. If $f_n=\sum a_{ni}I_{A_{ni}}$
+then $f_nIN=\sum a_{ni}I_{A_{ni}\cap N}$. This implies that $\int f_nINd\mu=\sum a_{ni}\mu(A_{ni}\cap N)=0$ since $\mu(A_{ni}\cap N)\leq \mu(N)=0$. Therefore $\int fI_Nd\mu=\lim\limits_{n\to\infty}f_nINd\mu=0$.
+\end{proof}
+
+
+
+\begin{theorem}
+\begin{enumerate}
+\item If $f$ and $g$ are nonnegative measurable functions and $f=g$ a.e., then $\int fd\mu=\int gd\mu$.
+\item If $\{f_n\}$ and $f$ are nonnegative measurable functions with $\{f_n\}$ increasing and $\lim\limits_{n\to\infty}f_n=f$ a.e.. Then $\lim\limits_{n\to\infty}\int f_nd\mu=\int fd\mu$.
+\end{enumerate}
+\end{theorem}
+
+
+
+\begin{proof}
+\begin{enumerate}
+\item $f_n=\sum_{j=0}^{n2^n-1}j2^{-n}I_{f^{-1}((j2^{-n},(j+12^{-n})])}+nI_{f^{-1}((n,\infty])}$ and 
+
+$g_n=\sum_{j=0}^{n2^n-1}j2^{-n}I_{g^{-1}((j2^{-n},(j+12^{-n})])}+nI_{g^{-1}((n,\infty])}$. Then $f_n=g_n$ a.e. and so $\int f_nd\mu=\int g_nd\mu$. The result now follows by monotone convergence.
+
+\item Let $N=\{\omega\in\Omega: \lim\limits_{n\to\infty}f_n(\omega)\neq f(\omega) \}$. Then $\lim\limits_{n\to\infty}f_nI_{N^c}=fI_{N^c}$. From this it follows that 
+\begin{equation*}
+\lim\limits_{n\to\infty}\int f_nd\mu = \lim\limits_{n\to\infty}\int f_nI_{N^c}d\mu = \int fI_{N^c}d\mu = \int f d\mu
+\end{equation*}
+\end{enumerate}
+\end{proof}
+
+
+\begin{lemma}[Fatou Lemma]
+For a sequence $\{f_n\}$ nonnegative measurable functions
+\begin{equation*}
+\int \lim \inf f_n d\mu \leq \lim \inf \int f_n d\mu 
+\end{equation*}
+\end{lemma}
+
+
+
+\begin{proof}
+Let $g_n = \inf_{k\geq n}f_k$. Then $\{g_n\}$ is an increasing sequence with $\lim\limits_{n\to\infty}g_n=\lim \inf f_n$. For $k\geq n$, we have $f_k\geq g_n$, so that $\int f_kd\mu\geq \int g_nd\mu$. This implies that $\inf_{k\geq n}\int f_k d\mu\geq \int g_n d\mu$. Thus $\int \lim \inf f_n \leq \lim\limits_{n}\inf_{k\geq n}\int f_k d\mu=\lim \inf \int f_nd\mu$.
+\end{proof}
+
+
+
+
+\begin{lemma}[Reverse Fatou]
+If $\{f_n \}$ is a sequence of nonnegative measurable functions such that for some nonnegative measurable function $g$, we have $f_n<g$ for all $n$ and $\int gd\mu$, then
+\begin{equation*}
+\lim \sup f_n d\mu \geq \lim \sup \int f_n d\mu.
+\end{equation*}
+\end{lemma}
+
+
+\begin{proof}
+For each $n$, let $h_n=g-f_n$. Then $\{h_n\}$ is a sequence of nonnegative measurable functions and by Fatou lemma we have
+\begin{align*}
+\int gd\mu - \lim \sum \int f_nd\mu &=\lim \inf \int h_n d\mu \\
+	&\geq \int\lim \inf h_nd\mu \\
+	&=\int gd\mu - \int \lim\sup f_nd\mu.
+\end{align*}
+Subtracting $\int gd\mu$ on both sides of the inequality gives the result.
+\end{proof}
+
+
+
+\begin{theorem}[Dominated Convergence Theorem]
+Suppose that $\{f_n\}$, $f$ are measurable functions, that $\lim\limits_{n\to\infty}f_n=f$ on $\Omega$ and that $\vert f_n\vert \leq g$ for some integrable function $g$. Then
+\begin{equation*}
+\lim\limits_{n\to\infty}\inf \vert f_n-f\vert d\mu=0
+\end{equation*}
+and, hence, $\lim\limits_{n\to\infty}\int f_nd\mu=\int fd\mu$.
+\end{theorem}
+
+
+
+
+\begin{proof}
+Note that $\abs{f_n-f}\leq 2g$ and so by reverse Fatou lemma
+\begin{equation*}
+\limsup \inf\abs{f_n-f}d\mu \leq \inf \limsup\abs{f_n-f}=0.
+\end{equation*}
+
+Consequently,
+\begin{equation*}
+\lim\limits_{n\to\infty}\left\lvert\int f_nd\mu - \int fd\mu \right\rvert=\lim_{n\to\infty}\left\lvert \int (f_n-f)d\mu \right\rvert \leq \lim\limits_{n\to\infty}\int \abs{f_n-f}d\mu = 0.
+\end{equation*}
+\end{proof}
+
+
+
+
+\begin{corollary}[Bounded Convergence Theorem]
+Suppose that $\{f_n\}$, $f$ are measurable functions, that $\lim\limits_{n\to\infty}f_n=f$ on $\Omega$ and that $\abs{f_n}\leq M$ for some real number $M<\infty$. Then $\lim\limits_{n\to\infty}\int f_nd\mu=\int fd\mu$.
+\end{corollary}
+
+
+
+\begin{theorem}
+\begin{enumerate}
+\item If $f_n\geq 0$ for all $n$, then $\int\sum_n f_n d\mu=\sum_n \int f_nd\mu$.
+\item If $\sum_n f_n$ converges a.e. and $\left\lvert \sum_{k=1}^{n}f_k\right\rvert\leq g$ a.e., where $g$ is integrable, then $\sum_n f_n$ and the $f_n$ are integrable and $\int \sum_n f_n d\mu=\sum_n \int f_n d\mu$.
+\end{enumerate}
+\end{theorem}
+
+
+\begin{proof}
+\begin{enumerate}
+\item Let $g_k=\sum_{n=1}^{k} f_n$. Then $\{g_k \}$ is an increasing sequence of nonnegative functions with $\lim\limits_{k\to\infty}g_k=\sum f_n$. It follows from the Monotone Convergence theorem that
+\begin{equation*}
+\int\sum f_nd\mu =\lim\int g_k d\mu = \lim\limits_{k\to\infty}\sum_{n=1}^{k}\int f_n d\mu=\sum \int f_n d\mu.
+\end{equation*}
+
+\item Same proof as above ecept that it follows from DCT instead of MCT.
+\end{enumerate}
+\end{proof}

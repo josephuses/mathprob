@@ -1,0 +1,88 @@
+\documentclass{article}
+
+\usepackage[%
+inner=1.5in,
+outer=1in,
+top=1in,
+bottom=1in
+]{geometry}
+
+\usepackage{amsmath, amssymb, amsthm}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{notes}{Note(s)}
+
+\usepackage{mathrsfs}
+
+\usepackage{enumitem}
+\newlist{prooflist}{enumerate}{1}
+\setlist[prooflist]{label=(\emph{\roman*})}
+
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\newcommand{\D}{\ensuremath{\mathcal D}}
+\newcommand{\F}{\ensuremath{\mathcal F}}
+\newcommand{\J}{\ensuremath{\mathcal J}}
+\newcommand{\G}{\ensuremath{\mathcal G}}
+
+\title{Stat 235 Exercise 1}
+\author{Joseph S. Tabadero, Jr.}
+\date{February 19, 2016}
+
+\begin{document}
+	
+	\maketitle
+
+\begin{theorem*}[$\star$]\label{thm:3}
+If $\mathcal J$ is a $\pi$-system and $\mathcal D$ is a $d$-system with $\mathcal J\subset \mathcal D$, then $\sigma(\mathcal J)\subset \mathcal D$.
+\end{theorem*}
+
+\begin{notes}
+$\sigma(\mathcal J)\subset \mathcal D$ means that $\D$ contains the smallest $\sigma$-algebra contained in $\J$. 
+\end{notes}
+
+\begin{proof}
+To show $\sigma(\J)\subset \D$, we need only show that $\D$ is a $\pi$-system. Why? If $\D$ is a $\pi$-system, then, since it is also a $d$-system, then it is a $\sigma$-algebra. $\sigma(\J)$ and $\D$ both being $\sigma$-algebras and $\sigma(\J)$ being the smallest $\sigma$-algebra containing $\J$ means $\sigma(\J)\subset \D$.
+
+Now without loss of generality, we can also let $\D$ be the smallest such $d$-system that contains $\J$. If it holds that $\sigma(\J)\subset \D$ for this $\D$ then it will hold for other bigger $\D$'s.
+
+Consider $\F=\{A\in\D\mid A\cap B\in\D\; \text{for all}\; B\in\J \}$. We need to show that $\J\subset \F$ and $\F$ is a $d$-system.
+
+Note than since $\J$ is a $\pi$-system, for $A\in\J$ then $A\cap B\in \D$ for all $B\in\J$. Hence, $A\in\F$ and $\J\subset\F$.
+
+
+We now proceed to show that $\F$ is a $d$-system. 
+\begin{prooflist}
+	\item Now $\Omega\cap B=B\in\J$ for all $B\in\J$ and hence $\Omega\in\F$.
+	\item Moreover, if $A,C\in\F$ and $A\subset C$ then for any $B\in \J$, $(C\setminus A)\cap B=(C\cap B)\setminus (A\cap B)$. Now $C\cap B\in \D$ and $A\cap B \D$ by definition of $\F$. So $(C\setminus A)\cap B\in \D$ since $\D$ is a $d$-system. Thus $C\setminus A$ satisfies the condition of $\F$ so $C\setminus A\in \F$.
+	\item $A_1, A_2, \ldots \in\F$ and $A_1\subset A_2\subset\cdots$. Then for any $B\in\J$, $\left(\bigcup_{i=1}^\infty A_i\right)\cap B = \bigcup_{i=1}^\infty(A_i\cap B)$. Now $A_i\cap B\in\D$ for all $i$ since $A_i\in\F$ and $(A_1\cap B)\subset (A_2\cap B)\subset (A_3\cap B)\subset \cdots$. This means that $\left(\bigcup_{i=1}^\infty A_i\right)\cap B=\bigcup_{i=1}^\infty(A_i\cap B)\in\D$, since $\D$ is a $d$-system. Therefore, $\left(\bigcup_{i=1}^\infty A_i\right)\in\F$. Therefore, $\F$ is a $d$-system.
+\end{prooflist}
+
+
+
+Now since $\D$ is the smallest $d$-system containing $\J$, and $\J\subset\D$ it follows that $\F=\D$. Therefore, if $A\in\D$ and $B\in\J$, then $A\cap B\in\D$.
+
+Now define $\G=\{B\in\D\mid A\cap B\in\D\; \text{for all}\; A\in\D  \}$. Note that $\J\subset\G$. We can show in a similar fashion that $\G$ is a $d$-system (see Exercise \ref{exer:1}). Hence, $\G=\D$. Therefore, if $A,B\in\D$ then $A\cap B\in\D$ and hence $\D$ is a $\pi$-system. Now $\D$ is then both a $\pi$-system and a $d$-system, and, whence, a $\sigma$-algebra. Therefore, $\sigma(\J)\subset\D$.
+\end{proof}
+
+\section*{Exercises}
+
+\begin{enumerate}
+\item\label{exer:1} Show that $\G=\{B\in\D\mid A\cap B\in\D\; \text{for all}\; A\in\D  \}$ in the proof of Theorem $(\star)$ is a $d$-system.
+
+\begin{proof}
+\begin{prooflist}
+	\item Now $\Omega\in\D$ since $\D$ is a $d$-system. Let $A\in\D$. Now, $\Omega\cap A=A\in\D$. Therefore, $\Omega\in\G$.
+	\item Moreover, if $B,C\in\G$ and $B\subset C$ then for any $A\in \D$, $(C\setminus B)\cap A=(A\cap C)\setminus (A\cap B)$. Now $A\cap C\in\D$ and $A\cap B\in \D$ by definition of $\G$. So $(C\setminus A)\cap B\in \D$ since $\D$ is a $d$-system. Thus $C\setminus A$ satisfies the condition of $\G$ so $C\setminus A\in \G$.
+	\item Suppose $B_1, B_2, \ldots \in\G$ and $B_1\subset B_2\subset\cdots$. Then for any arbitrary $A\in\D$, $\left(\bigcup_{i=1}^\infty B_i\right)\cap A = \bigcup_{i=1}^\infty(B_i\cap A)$. Now $B_i\cap A\in\D$ for all $i$ since $B_i\in\G$ and $(B_1\cap A)\subset (B_2\cap A)\subset (B_3\cap A)\subset \cdots$. This means that $\left(\bigcup_{i=1}^\infty B_i\right)\cap A=\bigcup_{i=1}^\infty(B_i\cap A)\in\D$, since $\D$ is a $d$-system. Therefore, $\left(\bigcup_{i=1}^\infty B_i\right)\in\G$. Therefore, $\G$ is a $d$-system.
+\end{prooflist}
+\end{proof}
+
+\end{enumerate}
+
+
+\end{document}

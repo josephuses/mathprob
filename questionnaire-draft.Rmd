@@ -1,0 +1,15 @@
+---
+title: "Questionnaire Draft"
+author: "Soc 295"
+date: "April 12, 2016"
+output: pdf_document
+---
+
+```{r}
+library(dplyr)
+question <- read.csv("survey-questionnaire.csv", header=TRUE)
+question <- tbl_df(question)
+question$order <- sample(1:18, 18)
+sort(question, order)
+```
+

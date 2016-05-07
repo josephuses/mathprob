@@ -1,0 +1,106 @@
+\chapter{Caratheodory's Extension Theorem}
+
+Throughout our lessons, one of our aims is to make the concept of the $\sigma$-algebra concept easier, smaller.
+
+\begin{theorem}[Caratheodory's Extension Theorem]
+Let $\Omega$ be a set, let $\mathcal A$ be an algebra on $\Omega$, and let $\F=\sigma(\mathcal{A})$. If $\mu_0$ is a countably additive map $\mu_0:\mathcal A\to [0, \infty]$, then there exists a measure $\mu$ on $(\Omega, \F)$ such that $\mu=\mu_0$ on $\mathcal A$. If $\mu_0(S)<\infty$ then this extension is unique.
+\end{theorem}
+
+\begin{definition}[Outer measure]
+For any set $A\subseteq \Omega$ define the outer measure $\mu^*(A)$ of $A$ by
+\begin{equation}
+\mu^*(A)=\inf\left\{\sum_{n=1}^{\infty}\mu_0(A_n): A_n\in \mathcal{A}, A\subseteq \bigcup_{n=1}^\infty A_n \right\}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}
+For any sets $A$ and $A_n$ in $\Omega$, if $A\subseteq \bigcup_{n=1}^\infty A_n$ then
+\begin{equation}
+\mu^*\leq\sum_{n=1}^{\infty} \mu^*(A_n).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+If the latter sum is $+\infty$, there is no problem. Otherwise, given $\varepsilon>0$, let $A_n\bigcup_m A_{nm}$ and $\sum_{m}\mu_0(A_{nm})<\mu^*(A_n)+\varepsilon/2^n$ with $A_{nm}\in\mathcal A$ for all $m,n$. Then $A\subseteq \bigcup_{m,n}A_{nm}$ and
+\begin{equation}
+\mu^*(A)\leq \sum_n\sum_m\mu_0(A_{nm})\leq \sum_n \mu^*(A_n)+\varepsilon.
+\end{equation}
+Letting $\varepsilon \downarrow 0$ proves the result.
+\end{proof}
+
+\begin{lemma}
+For any $A\in \mathcal A$, $\mu^*(A)=\mu_0(A)$.
+\end{lemma}
+
+\begin{proof}
+Clearly, $\mu^*(A)\leq \mu_0(A)$. Let $A\subseteq\bigcup_n A_n$ and $B_n=A_n\setminus\bigcup_{j<n}A_j$ with $A_n\in\mathcal A$. \begin{equation}
+\mu_0(A)\leq\mu_0(\cup B_n)=\sum \mu(B_n)\leq \sum \mu(A_n).
+\end{equation}
+Since the $A_n$'s are arbitrary then $\mu_0(A)\leq \mu^*(A)$.
+\end{proof}
+
+\begin{definition}[$\mu^*$-measurable]
+A set $E\subset \Omega$ is called $\mu^*$-measurable if for every set $A\subset \Omega$,
+\begin{equation}
+\mu^*(A)=\mu^*(A\cap E)+\mu^*(A\cap E^c)
+\end{equation}
+We will denote the collection of $\mu^*$-measurable sets by $\mathcal M(\mu^*)$.
+\end{definition}
+
+
+\begin{lemma}
+All sets in $\mathcal A$ are $\mu^*$-measurable, i.e., $\mathcal A\subset \mathcal M(\mu^*)$.
+\end{lemma}
+
+\begin{proof}
+Let $A\in \mathcal A$ and $B\subset \Omega$. Given $\varepsilon>0$, take $B\subset \cup B_n$ with $B_n\in\mathcal A$ and $\sum \mu_0(B_n)\leq \mu^*(B)+\varepsilon$. Then $B\cap A\subset \bigcup(B_n\cap A)$, $B\cap A^c\subset \bigcup(B_n\cap A^c)$ with $B_n\cap A\in \mathcal A$ and $B_n\cap A^c\in \mathcal A$. So that
+\begin{align*}
+mu^*(B\cap A)+\mu^*(B\cap A^c)&\leq \sum[\mu^*(B_n\cap A)+\mu^*(B_n\cap A^c)]\\
+&\leq \sum \mu_0(B_n)\leq \mu^*(B)+\varepsilon.
+\end{align*}
+Letting $\varepsilon \downarrow 0$ gives the result.
+\end{proof}
+
+
+\begin{lemma}
+$\mathcal M(\mu^*)$ is a $\sigma$-algebra and $\mu^*$ is a measure on it.
+\end{lemma}
+
+\begin{proof}
+Clearly $A\in\mathcal{M}(\mu^*)$ then $A^c\in\mathcal M(\mu^*)$. If $A, B\in \mathcal M(\mu^*)$ then for $C\subset \Omega$,
+\begin{align*}
+\mu^*(C)&=\mu^*(C\cap A)+\mu^*(C\cap A^c)\\
+ &=\mu^*(C\cap A\cap B)+\mu^*(C\cap A\cap B^c)+\mu^*(C\cap A^c)\\
+ &=\mu^*(C\cap(A\cap B))+\mu^*(C\cap (A\cap B)^c).
+\end{align*}
+Thus $\mathcal M(\mu^*)$ is an algebra. Let $A_n\in\mathcal M(\mu^*)$, $A=\bigcup_n A_n$, $B_n=\bigcup_{j<n}A_j$, and assume, without loss of generality, that the $A_n$'s are disjoint.
+
+Note that for $E\subset \Omega$
+\begin{align*}
+\mu^*&=\mu^*(E\cap B_n^c)+\mu^*(E\cap B_n)\\
+ &=\mu^*(E\cap B_n^c)+\mu^*(E\cap A_n)+\mu^*\left(\bigcup_{j<n}(E\cap A_i)\right).
+\end{align*}
+From this it follows by induction on $n$ that
+\begin{equation*}
+\mu^*(E)\geq \mu^*(E\cap A^c)+\sum_{j=1}^{n}\mu^*(E\cap A_j).
+\end{equation*}
+Letting $n\to \infty$
+\begin{equation*}
+\mu^*(E)\geq \mu^*(E\cap A^c)+\mu^*(E\cap A).
+\end{equation*}
+Thus $A\in\mathcal M(\mu^*)$ and
+\begin{equation}
+\mu^*(E)=\mu^*(E\cap A^c)+\sum_{j=1}^\infty\mu^*(E\cap A_j)
+\end{equation}
+Letting $E=A$ shows that $\mu^*$ is countably additive on $\mathcal M(\mu^*)$.
+\end{proof}
+
+Here is the proof of the Caratheodory's Theorem
+
+\begin{proof}
+Note that by Lemmas 3 and 4, $\mathcal M(\mu^*)$ is a $\sigma$-algebra containing $\mathcal A$ and, hence, $\F\subset \mathcal M(\mu^*)$. Take $\mu=\mu^*$ on $\mathcal F$. Then $\mu$ is a measure on $\mathcal{F}$ and for $A\in \mathcal A$,
+\begin{equation*}
+\mu(A)=\mu^*(A)=\mu_0*(A).
+\end{equation*}
+Uniqueness follows from Theorem 2 of Lecture 3.
+\end{proof}

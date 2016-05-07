@@ -1,0 +1,322 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>R Tutorials--Chi Square Goodness of Fit Test</title>
+
+<style>
+body { background-color: #dddddd; }
+</style>
+
+</head>
+
+<body><center>
+<table width="804" bgcolor="white" border="1" cellpadding="5" cellspacing="0">
+<tbody><tr><td>
+
+<img alt="R Tutorials by William B. King, Ph.D." src="R%20Tutorials--Chi%20Square%20Goodness%20of%20Fit%20Test_files/R_banner.png" height="150" width="800">
+
+<hr>
+<font face="helvetica">
+<center>| <a href="https://ww2.coastal.edu/kingw/statistics/R-tutorials/index.html">Table of Contents</a>
+        | <a href="https://ww2.coastal.edu/kingw/statistics/R-tutorials/funref.html" target="_blank">Function Reference</a>
+        | <a href="https://ww2.coastal.edu/kingw/statistics/R-tutorials/text/function_ref.txt" target="_blank">Function Finder</a>
+        | <a href="https://www.r-project.org/" target="_blank">R Project</a> |
+</center></font>
+<hr>
+
+<p align="center"><b><font size="+2">CHI SQUARE GOODNESS OF FIT TEST</font></b></p>
+
+<hr><!-- ******************************************************************* -->
+
+<p><b>Syntax</b></p>
+
+<p>From the help page, the syntax of the <font face="courier">
+chisq.test()</font> function is...
+
+<br>
+<font face="courier"></font></p><pre><font face="courier">chisq.test(x, y = NULL, correct = TRUE,
+           p = rep(1/length(x), length(x)), rescale.p = FALSE,
+           simulate.p.value = FALSE, B = 2000)</font></pre><font face="courier">
+</font>
+
+This function is used for both the goodness of fit test and the test of
+independence, and which it does depends upon what kind of data you feed it. If
+"x" is a numeric vector or a one-dimensional table of numerical values, a
+goodness of fit test will be done (or attempted), treating "x" as a vector of
+observed frequencies.  If "x" is a 2-D table, array, or matrix, then it is
+assumed to be a contingency table of frequencies, and a test of independence
+will be done.<p></p>
+
+<p>Ignore "y". (See the help page if you must know.) The "correct=TRUE" option
+applies the Yates continuity correction when "x" is a 2x2 table. Set this to
+FALSE if the correction is not desired. For the goodness of fit test, set "p"
+equal to the null hypothesized proportions or probabilies for each of the
+categories represented in the vector "x". These must add exactly to 1.
+In the examples, I'll also illustrate
+how this vector can be set to the expected frequencies. The default is equal
+frequencies or probabilities. The remaining options can be ignored.</p>
+
+<hr><!-- ******************************************************************* -->
+
+<p><b>Textbook Problems</b></p>
+
+<p>"Professor Bumblefuss takes a random sample of students enrolled in
+Statistics 101 at ABC University. He finds the following: there are 25 freshman
+in the sample, 32 sophomores, 18 juniors, and 20 seniors. Test the null
+hypothesis that freshman, sophomores, juniors, and seniors are equally
+represented among students signed up for Stat 101."</p>
+
+<p>This is a goodness of fit test with equal expected frequencies. The "p"
+vector does not need to be specified, since equal frequencies is the default.
+The observed frequencies can be fed directly into the test, using <font face="courier">
+c()</font> to collect them into a vector, or the frequencies can be put into a
+vector first and the name of the vector fed to the test.
+
+<br>
+<font face="courier"></font></p><pre><font face="courier">&gt; chisq.test(c(25,32,18,20))           # or freqs=c(25,32,18,20); chisq.test(freqs)
+
+        Chi-squared test for given probabilities
+
+data:  c(25, 32, 18, 20) 
+X-squared = 4.9158, df = 3, p-value = 0.1781</font></pre><font face="courier">
+</font>
+
+Either way, the null hypothesis cannot be rejected at alpha = .05.<p></p>
+
+<p>"Professor Iconoclast argues that Bumblefuss is wrong, and that the number of
+freshman and sophomores enrolled is each twice the number of juniors and the
+number of seniors. Test Iconoclast's hypothesis from these same data."</p>
+
+<p>Now the expected frequencies are no longer equal, so a "p" vector must be
+specified. A little algebra leads us to the expected probabilities of 1/3, 1/3,
+1/6, and 1/6. Since these numbers are awkward to enter as decimal numbers,
+they are best entered as fractions, letting R do the arithmetic for us. (You
+should always use fractions, when possible.)
+
+<br>
+<font face="courier"></font></p><pre><font face="courier">&gt; null.probs = c(1/3,1/3,1/6,1/6)
+&gt; freqs = c(25,32,18,20)
+&gt; chisq.test(freqs, p=null.probs)      # p is not the second option, so must be labeled
+
+        Chi-squared test for given probabilities
+
+data:  freqs
+X-squared = 2.8, df = 3, p-value = 0.4235</font></pre><font face="courier">
+</font>
+
+A warning: Since R does not expect the "p" vector to come second inside the
+<font face="courier">chisq.test()</font> function, it MUST be given its correct
+name, "p=". It doesn't appear that we can reject Iconoclast's null hypothesis
+either.<p></p>
+
+<p>The chi-square distribution is a continuous probability distribution, which
+is being used here as an approximation to the discrete case. To be an accurate
+approximation, the expected frequencies must be sufficiently large. R will
+issue a warning message if any of the EFs fall below 5, but it's good practice
+to check them nevertheless. This leads us to a device we will use often in
+future tutorials--storing the output of an R procedure to an object in the
+workspace, and
+then extracting the information we want. Usually, the printed output of an R
+procedure is only a small part of what R has calculated. Here's how to see
+more.
+
+<br>
+<font face="courier"></font></p><pre><font face="courier">&gt; results = chisq.test(freqs, p=null.probs)
+&gt; results
+
+        Chi-squared test for given probabilities
+
+data:  freqs
+X-squared = 2.8, df = 3, p-value = 0.4235
+
+&gt; results$expected
+[1] 31.66667 31.66667 15.83333 15.83333
+&gt; results$residuals
+[1] -1.18469776  0.05923489  0.54451008  1.04713477</font></pre><font face="courier">
+</font>
+
+The "results" object now contains a list of the stuff R has calculated. To see
+what is in the list, see the section headed "Value" on the help page for the
+<font face="courier">chisq.test()</font> function. The query "results$expected"
+shows the expected
+frequencies under the null hypothesis. The query "results$residuals" shows the
+unsquared chi values in each cell, allowing us to see where the biggest
+deviations are from frequencies the null predicted.<p></p>
+
+<p>One more example will demonstrate another trick for specifying expected
+frequencies. "Last year, the same study was done on the Stat 101 class, and
+frequencies observed were: 30 freshman, 28 sophomores, 28 juniors, and 11
+seniors. Test to see if this year's results matched last years, to within the
+limits of random sampling error." It's an awkward sample size,
+so a good way to handle the expected probabilities is like this.
+
+<br>
+<font face="courier"></font></p><pre><font face="courier">&gt; new.freqs = c(30,28,28,11)
+&gt; freqs -&gt; old.freqs
+&gt; chisq.test(new.freqs, p=old.freqs/sum(old.freqs))
+
+	Chi-squared test for given probabilities
+
+data:  new.freqs
+X-squared = 10.8353, df = 3, p-value = 0.01265</font></pre><font face="courier">
+</font>
+
+Looks like we're significantly off from what was observed last year.<p></p>
+
+<hr><!-- ******************************************************************* -->
+
+<p><b>Data From a Table Object</b></p>
+
+<p>The object entered into <font face="courier">chisq.test()</font> for "x="
+must be a vector of
+observed frequencies. If the data are in some other form, a vector must be
+extracted somehow. I will use the built-in data set "HairEyeColor" to
+demonstrate. This is a 3-D table that crosstabulates hair color, eye color, and
+sex for 592 statistics students. Suppose we are interested only in eye color.
+
+<br>
+<font face="courier"></font></p><pre><font face="courier">&gt; dimnames(HairEyeColor)
+$Hair
+[1] "Black" "Brown" "Red"   "Blond"
+
+$Eye
+[1] "Brown" "Blue"  "Hazel" "Green"
+
+$Sex
+[1] "Male"   "Female"
+
+&gt; eyes = margin.table(HairEyeColor, 2)      # eye color in margin 2
+&gt; eyes
+Eye
+Brown  Blue Hazel Green 
+  220   215    93    64</font></pre><font face="courier">
+</font>
+
+Suppose a certain physiologist proposes that 50% of people should have brown
+eyes, 25% blue eyes, 15% hazel eyes, and 10% green eyes. (I don't know why. I
+made these numbers up!) Does the sample at hand agree with the physiologist's
+hypothesis?
+
+<br>
+<font face="courier"><pre>&gt; chisq.test(eyes, p=(.5, .25, .15, .1))
+Error: unexpected ',' in "chisq.test(eyes, p=(.5,"
+&gt;
+&gt; # Okay, I have to remember how to create a vector! Sheesh!
+&gt;
+&gt; chisq.test(eyes, p=c(.5, .25, .15, .1))
+
+        Chi-squared test for given probabilities
+
+data:  eyes 
+X-squared = 50.4324, df = 3, p-value = 6.462e-11</pre>
+</font>
+
+The physiologist's hypothesis is not supported. (Note: See the <a href="https://ww2.coastal.edu/kingw/statistics/R-tutorials/descriptive.html">More Descriptive Statistics</a> tutorial for the
+<font face="courier">margin.table()</font> function.<p></p>
+
+<hr><!-- ******************************************************************* -->
+
+<p><b>Data From a Data Frame</b></p>
+
+<p>If a data frame contains categorical data in one variable, it can be
+extracted into a 1-D frequency table using the <font face="courier">table()</font>
+function.
+
+<br>
+<font face="courier"></font></p><pre><font face="courier">&gt; data(survey, package="MASS")
+&gt; str(survey)
+'data.frame':   237 obs. of  12 variables:
+ $ Sex   : Factor w/ 2 levels "Female","Male": 1 2 2 2 2 1 2 1 2 2 ...
+ $ Wr.Hnd: num  18.5 19.5 18 18.8 20 18 17.7 17 20 18.5 ...
+ $ NW.Hnd: num  18 20.5 13.3 18.9 20 17.7 17.7 17.3 19.5 18.5 ...
+ $ W.Hnd : Factor w/ 2 levels "Left","Right": 2 1 2 2 2 2 2 2 2 2 ...
+ $ Fold  : Factor w/ 3 levels "L on R","Neither",..: 3 3 1 3 2 1 1 3 3 3 ...
+ $ Pulse : int  92 104 87 NA 35 64 83 74 72 90 ...
+ $ Clap  : Factor w/ 3 levels "Left","Neither",..: 1 1 2 2 3 3 3 3 3 3 ...
+ $ Exer  : Factor w/ 3 levels "Freq","None",..: 3 2 2 2 3 3 1 1 3 3 ...
+ $ Smoke : Factor w/ 4 levels "Heavy","Never",..: 2 4 3 2 2 2 2 2 2 2 ...
+ $ Height: num  173 178  NA 160 165 ...
+ $ M.I   : Factor w/ 2 levels "Imperial","Metric": 2 1 NA 2 2 1 1 2 2 2 ...
+ $ Age   : num  18.2 17.6 16.9 20.3 23.7 ...
+&gt; table(survey$Smoke)
+
+Heavy Never Occas Regul 
+   11   189    19    17
+&gt;
+&gt; smokers = table(survey$Smoke)
+&gt; smokers
+
+Heavy Never Occas Regul 
+   11   189    19    17</font></pre><font face="courier">
+</font>
+
+These are the responses of 237 statistics students at the University of
+Adelaide to a number of questions. The "Smoke" variable contains their
+responses to a question about smoking habits, and resulted in each student
+being classified into one of four categories: Never, Occasional, Regular, and
+Heavy.  We have extracted these data and have placed them into a 1-D table of
+frequencies called "smokers". This table can now be subjected to any reasonable
+(or even unreasonable) goodness of fit test. For example, we can test the null
+hypothesis that 70% of statistics students are nonsmokers, and that the other
+30% are divided equally among the remaining categories. The only thing we have
+to be careful of is that our null probabilities are given in the same order as
+the frequencies are given in the "smokers" table. (R has put them in a somewhat
+odd order, because R doesn't really understand the English language, so it just
+arranged them alphabetically.)
+
+<br>
+<font face="courier"><pre>&gt; chisq.test(smokers, p=c(.1, .7, .1, .1))
+
+        Chi-squared test for given probabilities
+
+data:  smokers 
+X-squared = 12.8983, df = 3, p-value = 0.004862
+
+&gt; chisq.test(smokers, p=c(.1, .7, .1, .1))$resid
+
+    Heavy     Never     Occas     Regul 
+-2.593669  1.851706 -0.946895 -1.358588</pre>
+</font>
+
+The hypothesis is rejected. It appears in particular that we have very much
+overestimated the percentage of "Heavy" smokers. Two things. One, the last part
+of this example shows that we do not need to store the output of the procedure
+to request residuals. All we need to do is stick "$resid" on the end of the
+command. We could have done the same with "$expected" or any other element of
+the outputted results. Also demonstrated is the convenient fact that, if we are
+too lazy to type the entire word "residuals," we can use just enough of it that
+R is able to recognize what we are asking for.<p></p>
+
+<p>In an undergraduate statistics class, you would probably be asked to
+calculate the expected frequencies. That's not hard. There are 236 subjects in
+the "smokers" vector (and one missing value). 10% of 236 is 23.6, and 70% is
+165.2. What if we tried to enter those actual expected frequencies into the
+p= option? The function would fail (try it), because those probabilities MUST
+add to one. Well, sort of. Here's how to do it.
+
+<br>
+<font face="courier"></font></p><pre><font face="courier">&gt; chisq.test(smokers, p=c(23.6, 165.2, 23.6, 23.6), rescale.p=TRUE)
+
+	Chi-squared test for given probabilities
+
+data:  smokers
+X-squared = 12.8983, df = 3, p-value = 0.004862</font></pre><font face="courier">
+</font>
+
+The rescale.p=TRUE option does the trick. Set it any time your p= values don't
+add exactly to 1.<p></p>
+
+<hr><!-- ******************************************************************* -->
+<i>revised 2016 January 27</i>
+<hr><!-- ******************************************************************* -->
+
+<font face="helvetica">
+<center>| <a href="https://ww2.coastal.edu/kingw/statistics/R-tutorials/index.html">Table of Contents</a>
+        | <a href="https://ww2.coastal.edu/kingw/statistics/R-tutorials/funref.html" target="_blank">Function Reference</a>
+        | <a href="https://ww2.coastal.edu/kingw/statistics/R-tutorials/text/function_ref.txt" target="_blank">Function Finder</a>
+        | <a href="https://www.r-project.org/" target="_blank">R Project</a> |
+</center></font>
+
+</td></tr></tbody></table>
+
+
+</center></body></html>

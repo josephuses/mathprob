@@ -1,0 +1,170 @@
+\chapter{$\Lp^p$ Spaces}
+
+\begin{definition}[$\Lp^p$ norm of $f$]
+For any measurable space $(\Omega, \F, \mu)$ and $0< p<\infty$, $\Lp^p(\Omega, \F, \mu)$ denotes the set of all measurable functions $f$ on $\Omega$ such that $\int \abs{f}^pd\mu<\infty$ and the values of $f$ are real numbers except possibly on a set of measure 0, where $f$ may be undefined or infinite. For $1\leq p<\infty$, let $\norm{f}_p=\left(\int \abs{f}^p d\mu \right)^{1/p}$, called the $\Lp^p$ norm of $f$.
+\end{definition}
+
+
+
+
+\begin{theorem}[Hölder Inequality]
+If $1<p<\infty$, $p^{-1}+q^{-1}=1$, $f\in \Lp^p$ and $g\in \Lp^q$, then $fg\in\Lp^1$ and
+\begin{equation*}
+\abs{\int fgd\mu}\leq \int \abs{fg}d\mu\leq \norm{f}_p\norm{g}_q.
+\end{equation*}
+\end{theorem}
+
+
+
+\begin{proof}
+If $\norm{f}_p=0$, then $f=0$ a.e., so $fg=0$ a.e., $\int\abs{fg}d\mu=0$, and the inequality holds, and likewise if $\norm{g}_q=0$. Assume that the norms are not 0. Now for any constant $c>0$, $\norm{cf}_p=c\norm{f}_p$, dividing out y the norms, we can assume $\norm{f}_p=\norm{g}_q=1$. We will use the fact that for any numbers $u,v$ and $0<\alpha <1$, $u^\alpha v^{1-\alpha}\leq au+(1-\alpha)v$. This implies that with $\alpha=1/p$, $u=\abs{f}^p$ and $v=\abs{g}^q$, 
+\begin{equation*}
+\abs{fg}\leq \alpha\abs{f}^p+(1-\alpha)\abs{g}^q.
+\end{equation*}
+Integrating gives
+\begin{equation*}
+\abs{fg}d\mu\leq \alpha\int\abs{f}^pd\mu + (1-\alpha)\int\abs{g}^qd\mu=\alpha\norm{f}^p_p+(1-\alpha)\norm{g}^q_q=1.
+\end{equation*}
+\end{proof}
+
+
+\begin{corollary}[Cauchy-Schwarz]
+For any $f$ and $g$ in $\Lp^2$, we have $fg\in\Lp^1$, and
+\begin{equation*}
+\abs{\int fgd\mu}\leq \norm{f}_2\norm{g}_2.
+\end{equation*}
+\end{corollary}
+
+
+
+
+\begin{theorem}[Minkowski's]
+for $1\leq p<\infty$, if $f$ and $g$ are in $\Lp^p(S, \mathcal{M},\mu)$, then $f+g\in\Lp^p(S, \mathcal{M}, \mu)$ and
+\begin{equation*}
+\norm{f+g}_p\leq \norm{f}_p+\norm{g}_p.
+\end{equation*}
+\end{theorem}
+
+
+
+\begin{proof}
+Since $\abs{f+g}\leq\abs{f}+\abs{g}$, we can replace $f$ and $g$ by their absolute values and so assume $f\geq 0$, $g\geq 0$. If $f=0$ a.e. or $g=0$ a.e., the inequality is clear. If $p=1$ or $\infty$ the inequality is straightforward. For $1<p<\infty$ we have
+\begin{equation*}
+(f+g)^p\leq 2^p\max(f^p, g^p)\leq 2^p(f^p+g^p).
+\end{equation*}
+Applying Hölder inequality gives
+\begin{align*}
+\norm{f+g}^p_p&=\int (f+g)^pd\mu\\
+	&=\int f(f+g)^{p=1}d\mu + \int g(f+g)^{p-1}d\mu\\
+	&\leq \norm{f}_p\norm{(f+g)^{p-1}}_q+\norm{g}_p\norm{(f+g)^{p-1}}_q.
+\end{align*}
+Now $(p-1)q=p$, so
+\begin{equation*}
+\norm{f+g}^p_p\leq (\norm{f}_p+\norm{g}_p)\norm{f+g}_p^{p/q}
+\end{equation*}
+which leads to the result.
+\end{proof}
+
+
+
+
+\begin{definition}[Seminorm]
+A seminorm on a real vector space $X$ is a function $\norm{\cdot}$ from $X$ into $[0,\infty)$ such that
+\begin{enumerate}
+\item $\norm{cx}=\abs{c}\norm{x}$ for all $c\in \Re$ and $x\in X$, and
+\item $\norm{x+y}\leq \norm{x}+\norm{y}$ for all $x$, $y\in X$. A \emph{seminorm} $\norm{\cdot}$ is called a norm if and only if $\norm{x}=0$ only for $x=0$. A normed space $(X, \norm{\cdot})$ is complete if for any sequence $\{x_n\}$ in $X$ with $\lim\limits_{m,n\to\infty}\norm{x_m-x_n}=0$ there exists an $x\in X$ with $\lim\limits_{n\to\infty}\norm{x_n-x}=0$.
+\end{enumerate}
+\end{definition}
+
+
+
+\begin{remark}
+The function $\norm{\cdot}_p$ is a seminorm on $\Lp^p$ but not a norm. For each $f$, we define the equivalence class $[f]$ by $[f]=\{g:f=g\ \text{a.e} \}$. For each $\Lp^p$ by $\Lp^p=\{[f]: f\in\Lp^p \}$. On $\Lp^p$ we define the real valued function $\norm{\cdot}_p$ by $\norm{[f]}_p=\norm{f}_p$. Then $(\Lp^p,\norm{\cdot}_p)$ is a complete normed linear space.
+\end{remark}
+
+
+
+\begin{definition}[Semi-inner product]
+A \emph{semi-inner product} on a real vector space $H$ is a function $(\cdot,\cdot)$ from $H\times H$ into $\Re$ such that
+\begin{enumerate}
+\item $(cf+g,h)=c(f,h)+(g,h)$ for all $c\in \Re$ and $f,g\in H$.
+\item $(f,g)=(g,f)$ for all $f,g\in H$.
+\item $(f,f)\geq 0$ for $f\in H$.
+\end{enumerate}
+A semi-inner product $(\cdot,\cdot)$ is called an \emph{inner product} if and only if $(f,f)=0$ implies $f=0$.
+\end{definition}
+
+
+
+
+\begin{definition}[Hilbert Space]
+Let $(H,(\cdot, \cdot))$ be an inner product space. Then $H$ is called a Hilbert space if it is complete for the norm $\norm{x}=(x,x)^{1/2}$.
+\end{definition}
+
+
+
+
+\begin{theorem}
+$\Lp^2(\Omega, \F, \mu)$ is a \emph{Hilbert space} with inner product
+\begin{equation*}
+([f],[g])=(f,g)=\int fgd\mu.
+\end{equation*}
+\end{theorem}
+
+
+
+
+\begin{theorem}
+A function $f$ from a Hilbert space $H$ into $\Re$ is linear and continuous if and only if for some $h\in H$, $f(x)=(x,h)$ for all $x\in H$. If so, then $h$ is unique.
+\end{theorem}
+
+
+
+\begin{theorem}
+Let $(\Omega, \F, \mu)$ be any finite measure space. Then for $1\leq r<s<\infty$, $\Lp^S(\Omega, \F, \mu)\subseteq \Lp^r(\Omega, \F, \mu)$, and the identity function from $\Lp^S$ into $\Lp^r$ is continuous.
+\end{theorem}
+
+
+
+\begin{proof}
+By Hölder inequality with $p=s/r$,
+\begin{equation*}
+\int\abs{f}^rd\mu=\int \abs{f}^r\cdot 1d\mu \leq \left(\int\abs{f}^{r(s/r)}\right)^{r/s}\mu(\Omega)^{1/q}<\infty.
+\end{equation*}
+Thus $\norm{f}_r\leq\norm{f}_S\mu(\Omega)^{\frac{1}{qr}}$ for all $f\in \Lp^S$. This implies continuity.
+\end{proof}
+
+
+
+
+\begin{definition}[Absolutely continuous]
+Let $\nu$ and $\mu$ be two measures on the same measurable space $(\Omega, \F)$. We say that $\nu$ is absolutely continuous with respect to $\mu$, denoted $\nu \prec \mu$, if and only if $\nu(A)=0$ whenever $\mu(A)=0$. We say that $\mu$ and $\nu$ are singular, denoted $\nu\perp\mu$, if and only if there is an $A\in\F$ with $\mu(A)=\nu(A^c)=0$.
+\end{definition}
+
+
+
+
+
+
+\begin{theorem}[Lebesque Decomposition]
+Let $(\Omega, \F)$ be a measurable space and $\mu$ and $\nu$ two $\sigma$-finite measures on it. Then there are unique measures $\nu_{ac}$ and $\nu_S$ such that $\nu=\nu_{ac}+\nu_{s}$, $\nu_{ac}\prec\mu$ and $\nu_{S}\perp\mu$.
+\end{theorem}
+
+
+
+\begin{theorem}[Radon-Nikodym]
+On the measurable space $(\Omega, \F)$ let $\mu$ be a $\sigma$-finite measure. Let $\nu$ be a finite measure, absolutely continuous with respect to $\mu$. Then there exists a nonnegative $f$ such that $\nu(A)=\int_A fd\mu$ for all $A$ in $\F$. Any two such $f$ are equal a.e. $(\mu)$.
+\end{theorem}
+
+
+
+
+\begin{proof}
+Form the Hilbert space $H=\Lp^2(\Omega, \F, \mu+\nu)$ then $\Lp^2\subseteq\Lp^1$ and the identity function from $\Lp^2$ into $\Lp^1$ is continuous. The linear function $h\mapsto \int hd\nu$ is continuous from $H$ to the set of real numbers and, hence, there is a $g\in H$, such that $\int hd\nu=\int hgd(\mu+\nu)$ for all $h\in H$. Note that the above can be written as
+\begin{equation*}
+\int h(1-g)d(\mu+\nu)=\int hd\mu
+\end{equation*}
+for all $h\in H$.
+
+Let $A=\{\omega: g(\omega)=1 \}$. For all $E\in\F$, let $\nu_S(E)=\nu(E\cap A)$ and $\nu_{ac}(E)=\nu(E\cap A^c)$. Then $\nu_S$ and $\nu_{ac}$ are measures with $\nu=\nu_S+\nu_{ac}$ and $\nu_S=0$. Let $f=g/(1-g)$ on $A^c$ and $f=0$ on $A$. Then $\int_E f d\mu=\int_{E\cap A^c} gd(\mu+\nu)=\nu(E\cap A^c)=\nu(E)$.
+\end{proof}
