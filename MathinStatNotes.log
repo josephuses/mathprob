@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.6)  8 MAY 2016 00:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.6)  8 MAY 2016 00:55
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1442,17 +1442,18 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-<Poisson_cdf.png, id=380, 326.21875pt x 260.975pt>
-File: Poisson_cdf.png Graphic file (type png)
- <use Poisson_cdf.png>
-Package pdftex.def Info: Poisson_cdf.png used on input line 46.
+<figures/Poisson_cdf.png, id=380, 326.21875pt x 260.975pt>
+File: figures/Poisson_cdf.png Graphic file (type png)
+
+<use figures/Poisson_cdf.png>
+Package pdftex.def Info: figures/Poisson_cdf.png used on input line 46.
 (pdftex.def)             Requested size: 173.44534pt x 138.76208pt.
 
-<overlap-intervals.png, id=384, 1134.2375pt x 481.8pt>
-File: overlap-intervals.png Graphic file (type png)
+<figures/overlap-intervals.png, id=384, 1134.2375pt x 481.8pt>
+File: figures/overlap-intervals.png Graphic file (type png)
 
-<use overlap-intervals.png>
-Package pdftex.def Info: overlap-intervals.png used on input line 61.
+<use figures/overlap-intervals.png>
+Package pdftex.def Info: figures/overlap-intervals.png used on input line 61.
 (pdftex.def)             Requested size: 325.215pt x 138.14516pt.
 
 
@@ -1461,7 +1462,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [27
 
 
- <./Poisson_cdf.png>] [28 <./overlap-intervals.png>])
+ <./figures/Poisson_cdf.png>] [28 <./figures/overlap-intervals.png>])
 (./chapters/c07construction-int.tex [29] [30
 
 
@@ -1528,9 +1529,9 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 18.
  ) 
 Here is how much of TeX's memory you used:
- 24855 strings out of 493054
- 452516 string characters out of 6134767
- 549754 words of memory out of 5000000
+ 24856 strings out of 493054
+ 452588 string characters out of 6134767
+ 549755 words of memory out of 5000000
  27175 multiletter control sequences out of 15000+600000
  41879 words of font info for 235 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
