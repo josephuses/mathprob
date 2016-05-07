@@ -1,0 +1,18 @@
+\documentclass{amsbook}
+
+\input layout
+\input meta
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\input notations
+
+\bash[stdoutFile=inputs.tex]
+{ shopt -s nullglob; for file in chapters/*.tex; do echo "\\input{$file}"; done; } 
+\END
+\input{inputs.tex}
+
+\end{document}
